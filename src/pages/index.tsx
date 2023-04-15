@@ -1,7 +1,15 @@
-export default function Home() {
+import React from "react";
+import Sidebar from "@/components/sidebar";
+
+export default function HomePage() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <div className="bg-black h-screen overflow-hidden">
+      <main>
+        <Sidebar />
+        {/* Center */}
+      </main>
+
+      <div>{/* Player */}</div>
+    </div>
+  );
 }
