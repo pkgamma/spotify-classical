@@ -1,8 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Classical Music Access
 
-## Getting Started
+Classical Music Access is a web application built with Next.js and React that aims to make classical music more accessible to a wider audience. The application utilizes the Open Opus API and Spotify API to provide users with access to a vast collection of classical music metadata and Spotify playback capabilities.
 
-First, run the development server:
+## Features
+
+- Browse thousands of classical works organized by periods, composers, and more
+- Listen to various recordings of each work available on Spotify
+- Utilize Spotify Connect API to control playback
+- User authentication system to save favorite works and recordings
+- Search for specific works or composers
+
+## Technologies Used
+
+- Next.js
+- React
+- Open Opus API
+- Spotify API
+- Spotify Connect API
+
+## Installation
+
+<!-- 1. Clone the repository to your local machine
+2. Install dependencies using `npm install`
+3. Obtain API keys for Open Opus API and Spotify API and save them in a `.env` file in the root directory of the project
+4. Start the development server using `npm run dev` -->
 
 ```bash
 npm run dev
@@ -20,19 +41,14 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributing
 
-## Learn More
+Contributions to this project are welcome! To contribute, please fork the repository and create a pull request with your changes.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License. See `LICENSE` for more information.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Authors
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Philip Kuo
