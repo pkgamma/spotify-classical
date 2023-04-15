@@ -1,40 +1,14 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
-// import SpotifyApi, { LOGIN_URL } from "../../../../lib/spotify";
 import SpotifyWebApi from "spotify-web-api-node";
 
-const scopes = [
-  "user-read-email",
-  "playlist-read-private",
-  "playlist-read-collaborative",
-  "user-read-email",
-  "streaming",
-  "user-read-private",
-  "user-library-read",
-  "user-top-read",
-  "user-read-playback-state",
-  "user-modify-playback-state",
-  "user-read-currently-playing",
-  "user-read-recently-played",
-  "user-follow-read",
-].join(",");
-
-const params = {
-  scope: scopes,
-};
-
-const queryParamString = new URLSearchParams(params).toString();
-
-const LOGIN_URL = `https://accounts.spotify.com/authorize?${queryParamString}`;
+const scope =
+  "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative";
 
 const SpotifyApi = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_CLIENT_ID,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 });
-
-// export default SpotifyApi;
-
-// export { LOGIN_URL };
 
 async function refreshAccessToken(token) {
   try {
@@ -61,33 +35,35 @@ export default NextAuth({
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-      authorization: LOGIN_URL,
+      authorization: {
+        params: { scope },
+      },
     }),
   ],
-  secret: process.env.JWT_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
   },
   callbacks: {
     async jwt({ token, account, user }) {
-      // initial login
+      // first step: get the access token and refresh token from spotify
       if (account && user) {
         return {
           ...token,
           accessToken: account.accessToken,
           refreshToken: account.refreshToken,
           username: user.providerAccountId,
-          accessTokenExpires: account.expires_at * 1000, // because expires_at is in seconds and Date.now() is in milliseconds
+          accessTokenExpires: account.expires_at * 1000, // convert to ms
         };
       }
 
-      // if the access token is still valid, return it
+      // second step: check if the access token has expired
+      // if it hasn't, return the token
       if (Date.now() < token.accessTokenExpires) {
         return token;
+      } else {
+        return await refreshAccessToken(token);
       }
-
-      // if the access token has expired, refresh it
-      return await refreshAccessToken(token);
     },
 
     async session({ session, token }) {

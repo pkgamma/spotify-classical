@@ -2,12 +2,12 @@ import { getProviders, signIn } from "next-auth/react";
 
 function Login({ providers }) {
   return (
-    <div>
+    <div className="flex flex-col items-center min-h-screen w-full justify-center">
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           <button
             className="bg-[#18D860] text-white p-4 rounded-full"
-            onClick={() => signIn(provider.id)}
+            onClick={() => signIn(provider.id, { callbackUrl: "/" })}
           >
             Sign in with {provider.name}
           </button>
