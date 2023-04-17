@@ -97,7 +97,7 @@ function Sidebar() {
         <p className="cursor-pointer hover:text-white">test</p>
         <p className="cursor-pointer hover:text-white">test</p>
         <p className="cursor-pointer hover:text-white">test</p>
-        <p className="cursor-pointer hover:text-white">test</p>>
+        <p className="cursor-pointer hover:text-white">test</p>
         <p className="cursor-pointer hover:text-white">test</p>
         <p className="cursor-pointer hover:text-white">test</p>
         <p className="cursor-pointer hover:text-white">test</p>
