@@ -10,7 +10,7 @@ const SpotifyApi = new SpotifyWebApi({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 });
 
-async function refreshAccessToken(token) {
+async function refreshAccessToken(token: any) {
   try {
     SpotifyApi.setAccessToken(token.accessToken);
     SpotifyApi.setRefreshToken(token.refreshToken);
