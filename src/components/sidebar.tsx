@@ -6,14 +6,31 @@ import {
   RssIcon,
   SearchIcon,
 } from "@heroicons/react/outline";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Sidebar() {
+  const { data: session, status } = useSession();
+
+  console.log(session);
+  // 1:47:45
+  const router = useRouter();
+
+  const handleLoginClick = () => {
+    router.push("/login");
+  };
+
   return (
     <div className="text-gray-500 p-5 text-sm border-r border-gray-900">
       <div className="space-y-4">
         <button
-          onClick={() => signOut}
+          onClick={handleLoginClick}
+          className="flex items-center space-x-2 hover:text-white"
+        >
+          <p className="font-bold">Login</p>
+        </button>
+        <button
+          onClick={() => signOut()}
           className="flex items-center space-x-2 hover:text-white"
         >
           <p>Logout</p>
