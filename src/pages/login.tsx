@@ -29,7 +29,6 @@ export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   const session = await getSession({ req });
 
   if (session) {
-    console.log("session", session);
     return {
       redirect: {
         destination: "/", // or any other page you want to redirect to
