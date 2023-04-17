@@ -14,7 +14,7 @@ function Center() {
             width={40}
             height={40}
             src={session?.user.image}
-            alt={session?.user.name}
+            alt="profile"
           />
           <h2>{session?.user.name}</h2>
           <ChevronDoubleDownIcon className="h-5 w-5" />

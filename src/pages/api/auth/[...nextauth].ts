@@ -33,8 +33,8 @@ async function refreshAccessToken(token: any) {
 export default NextAuth({
   providers: [
     SpotifyProvider({
-      clientId: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      clientId: process.env.SPOTIFY_CLIENT_ID as string,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
       authorization: {
         params: { scope },
       },
@@ -52,14 +52,16 @@ export default NextAuth({
           ...token,
           accessToken: account.accessToken,
           refreshToken: account.refreshToken,
-          username: user.providerAccountId,
-          accessTokenExpires: account.expires_at * 1000, // convert to ms
+          username: user.id,
+          accessTokenExpires: account?.expires_at
+            ? account.expires_at * 1000
+            : null,
         };
       }
 
       // second step: check if the access token has expired
       // if it hasn't, return the token
-      if (Date.now() < token.accessTokenExpires) {
+      if (Date.now() < (token.accessTokenExpires as number)) {
         return token;
       } else {
         return await refreshAccessToken(token);
@@ -67,9 +69,11 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
-      session.user.refreshToken = token.refreshToken;
-      session.user.username = token.username;
+      // if (session.user) {
+      //   session.user.accessToken = token.accessToken;
+      //   session.user.refreshToken = token.refreshToken;
+      //   session.user.username = token.username;
+      // }
       return session;
     },
   },
