@@ -2,7 +2,7 @@ import { getProviders, signIn } from "next-auth/react";
 
 function Login() {
   const handleLogin = () => {
-    signIn("spotify", { callbackUrl: "/" });
+    signIn("spotify", { callbackUrl: "https://spotify-classical.vercel.app" });
   };
 
   return (
