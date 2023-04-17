@@ -69,12 +69,13 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      // if (session.user) {
-      //   session.user.accessToken = token.accessToken;
-      //   session.user.refreshToken = token.refreshToken;
-      //   session.user.username = token.username;
-      // }
-      return session;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.username,
+        },
+      };
     },
   },
 });
