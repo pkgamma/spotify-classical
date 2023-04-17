@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from "next";
 import { getProviders, getSession, signIn } from "next-auth/react";
 
 interface LoginProps {
@@ -23,7 +24,7 @@ function Login({ providers }: LoginProps) {
 
 export default Login;
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   const providers = await getProviders();
   const session = await getSession({ req });
 
