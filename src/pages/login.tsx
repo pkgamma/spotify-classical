@@ -1,29 +1,20 @@
 import { getProviders, signIn } from "next-auth/react";
 
-function Login({ providers }) {
+function Login() {
+  const handleLogin = () => {
+    signIn("spotify", { callbackUrl: "/" });
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen w-full justify-center">
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <button
-            className="bg-[#18D860] text-white p-4 rounded-full"
-            onClick={() => signIn(provider.id, { callbackUrl: "/" })}
-          >
-            Sign in with {provider.name}
-          </button>
-        </div>
-      ))}
+      <button
+        className="flex px-12 py-2 text-lg tracking-widest uppercase rounded-full focus:outline-none bg-primary hover:bg-opacity-80"
+        onClick={handleLogin}
+      >
+        Login
+      </button>
     </div>
   );
 }
 
 export default Login;
-
-export async function getServerSideProps() {
-  const providers = await getProviders();
-  return {
-    props: {
-      providers,
-    },
-  };
-}
