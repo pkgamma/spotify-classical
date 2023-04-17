@@ -1,4 +1,4 @@
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, getSession, signIn } from "next-auth/react";
 
 interface LoginProps {
   providers: Record<string, any>;
@@ -23,8 +23,20 @@ function Login({ providers }: LoginProps) {
 
 export default Login;
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
   const providers = await getProviders();
+  const session = await getSession({ req });
+
+  if (session) {
+    console.log("session", session);
+    return {
+      redirect: {
+        destination: "/", // or any other page you want to redirect to
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       providers,
