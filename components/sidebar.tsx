@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Button } from "./ui/button";
 
 function Sidebar() {
   const { data: session, status } = useSession();
@@ -24,21 +25,10 @@ function Sidebar() {
     <div className="">
       <div className=" w-64 bg-gray-50 text-gray-800 p-4 border-r border-gray-300 overflow-y-scroll h-screen scrollbar-hide">
         <div className="">
-          <button
-            onClick={handleLoginClick}
-            type="button"
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          >
-            Login
-          </button>
-
-          <button
-            onClick={() => signOut()}
-            type="button"
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          >
+          <Button onClick={handleLoginClick}>Login</Button>
+          <Button variant="destructive" onClick={() => signOut()}>
             Logout
-          </button>
+          </Button>
 
           <button className={btnStyle}>
             <HomeIcon className="h-5 w-5" />
