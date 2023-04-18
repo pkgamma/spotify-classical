@@ -29,10 +29,7 @@ function Sidebar() {
     }
   }, [session, SpotifyApi]);
 
-  console.log(playlists);
-
   const router = useRouter();
-
   const handleLoginClick = () => {
     router.push("/login");
   };
@@ -74,82 +71,12 @@ function Sidebar() {
             <p>Episodes</p>
           </button>
 
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
+          {playlists.map((playlist) => (
+            <p key={playlist.id} className={btnStyle}>
+              {playlist.name}
+            </p>
+          ))}
+
           <p className={btnStyle}>test</p>
           <p className={btnStyle}>test</p>
           <p className={btnStyle}>test</p>
