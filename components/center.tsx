@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Songs from "./songs";
+import { cn } from "@/lib/utils";
 
-function Center() {
+function Center({ className }): JSX.Element {
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
   const playlistId = useRecoilValue(playlistIdState);
@@ -24,7 +25,7 @@ function Center() {
   }, [spotifyApi, playlistId]);
 
   return (
-    <div className="flex-grow">
+    <div className={cn("flex-grow h-screen overflow-scroll", className)}>
       <header className="absolute top-5 right-8">
         <div className="flex items-center bg-gray-200 space-x-3 transition duration-300 ease-in-out hover:opacity-70 cursor-pointer p-1 pr-2 m-4">
           <Image

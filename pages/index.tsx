@@ -5,15 +5,12 @@ import Player from "@/components/player";
 
 export default function HomePage() {
   return (
-    <div className="h-screen overflow-hidden">
-      <main className="flex">
-        <Sidebar />
-        <Center />
-      </main>
-
-      <div className="sticky bottom-0">
+    <div className="">
+      <main className="grid lg:grid-cols-6">
+        <Sidebar className="col-span-1" />
+        <Center className="col-span-4" />
         <Player />
-      </div>
+      </main>
     </div>
   );
 }
