@@ -1,6 +1,7 @@
 import { playlistState } from "@/atoms/playlistAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Song from "./song";
+import { currentTrackState, isPlayingState } from "@/atoms/songAtom";
 
 function Songs() {
   const playlist = useRecoilValue(playlistState);
