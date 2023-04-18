@@ -11,11 +11,17 @@ import { Button, buttonVariants } from "./ui/button";
 import { useEffect, useState } from "react";
 import useSpotify from "@/hooks/useSpotify";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { playlistIdState } from "@/atoms/playlistAtom";
+import { Separator } from "./ui/separator";
 
 function Sidebar() {
   const SpotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+
+  console.log("clicked on sidebar playlist ID " + playlistId);
 
   useEffect(() => {
     if (SpotifyApi.getAccessToken()) {
@@ -69,19 +75,17 @@ function Sidebar() {
             <p>Episodes</p>
           </button>
 
+          <Separator className="my-4" />
+
           {playlists.map((playlist) => (
-            <p key={playlist.id} className={btnStyle}>
+            <p
+              key={playlist.id}
+              onClick={() => setPlaylistId(playlist.id)}
+              className={btnStyle}
+            >
               {playlist.name}
             </p>
           ))}
-
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
-          <p className={btnStyle}>test</p>
         </div>
       </div>
     </div>
