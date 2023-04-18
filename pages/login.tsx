@@ -3,19 +3,12 @@ import { GetServerSidePropsContext } from "next";
 import { getProviders, getSession, signIn } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/ui/icons";
-
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Command } from "lucide-react";
-
-import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "@/components/user-auth-form";
-
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -31,7 +24,7 @@ function Login({ providers }: LoginProps) {
     <>
       <div className="md:hidden">
         <Image
-          src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80"
+          src="/examples/authentication-light.png"
           width={1280}
           height={843}
           alt="Authentication"
