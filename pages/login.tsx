@@ -1,11 +1,9 @@
 import * as React from "react";
 import { GetServerSidePropsContext } from "next";
 import { getProviders, getSession, signIn } from "next-auth/react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { HomeIcon } from "@heroicons/react/outline";
 
@@ -32,7 +30,7 @@ function Login({ providers }: LoginProps) {
             className="absolute inset-0 bg-cover"
             style={{
               backgroundImage:
-                "url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80)",
+                "url(https://images.unsplash.com/photo-1519683109079-d5f539e1542f)",
             }}
           />
           <div className="relative z-20 flex items-center text-lg font-medium">
@@ -116,7 +114,7 @@ export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   if (session) {
     return {
       redirect: {
-        destination: "/", // or any other page you want to redirect to
+        destination: "/",
         permanent: false,
       },
     };

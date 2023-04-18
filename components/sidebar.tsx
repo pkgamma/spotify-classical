@@ -9,9 +9,28 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
+import useSpotify from "@/hooks/useSpotify";
 
 function Sidebar() {
+  const SpotifyApi = useSpotify();
   const { data: session, status } = useSession();
+  const [playlists, setPlaylists] = useState([]);
+
+  useEffect(() => {
+    if (SpotifyApi.getAccessToken()) {
+      SpotifyApi.getUserPlaylists()
+        .then((response) => {
+          setPlaylists(response.body.items);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [session, SpotifyApi]);
+
+  console.log(playlists);
+
   const router = useRouter();
 
   const handleLoginClick = () => {

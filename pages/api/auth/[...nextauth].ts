@@ -1,34 +1,9 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
-import SpotifyWebApi from "spotify-web-api-node";
+import refreshAccessToken from "@/lib/spotify";
 
 const scope =
   "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative";
-
-const SpotifyApi = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-});
-
-async function refreshAccessToken(token: any) {
-  try {
-    SpotifyApi.setAccessToken(token.accessToken);
-    SpotifyApi.setRefreshToken(token.refreshToken);
-    const { body: refreshToken } = await SpotifyApi.refreshAccessToken();
-    return {
-      ...token,
-      accessToken: refreshToken.access_token,
-      accessTokenExpires: Date.now() + refreshToken.expires_in * 1000,
-      refreshToken: refreshToken.refresh_token ?? token.refreshToken,
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      ...token,
-      error: "RefreshAccessTokenError",
-    };
-  }
-}
 
 export default NextAuth({
   providers: [
@@ -44,41 +19,62 @@ export default NextAuth({
   pages: {
     signIn: "/login",
   },
+
   callbacks: {
-    async jwt({ token, account, user }) {
-      // first step: get the access token and refresh token from spotify
-      if (account && user) {
-        return {
-          ...token,
-          accessToken: account.accessToken,
-          refreshToken: account.refreshToken,
-          username: user.id,
-          accessTokenExpires: account?.expires_at
-            ? account.expires_at * 1000
-            : null,
-        };
+    async jwt({ token, account }) {
+      if (account) {
+        token.id = account.id;
+        token.expires_at = account.expires_at;
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
       }
-
-      // second step: check if the access token has expired
-      // if it hasn't, return the token
-      if (Date.now() < (token.accessTokenExpires as number)) {
-        return token;
-      } else {
-        return await refreshAccessToken(token);
+      if (Date.now() > token.expires_at * 1000) {
+        token = await refreshAccessToken(token);
       }
+      return token;
     },
-
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.username,
-          accessToken: token.accessToken,
-          refreshToken: token.refreshToken,
-          username: token.username,
-        },
-      };
+      session.user = token;
+      return session;
     },
   },
+
+  // OLD VERSION from youtube =====
+  // callbacks: {
+  //   async jwt({ token, account, user }) {
+  //     // first step: get the access token and refresh token from spotify
+  //     if (account && user) {
+  //       return {
+  //         ...token,
+  //         accessToken: account.accessToken,
+  //         refreshToken: account.refreshToken,
+  //         username: user.id,
+  //         accessTokenExpires: account?.expires_at
+  //           ? account.expires_at * 1000
+  //           : null,
+  //       };
+  //     }
+
+  //     // second step: check if the access token has expired
+  //     // if it hasn't, return the token
+  //     if (Date.now() < (token.accessTokenExpires as number)) {
+  //       return token;
+  //     } else {
+  //       return await refreshAccessToken(token);
+  //     }
+  //   },
+
+  //   async session({ session, token }) {
+  //     return {
+  //       ...session,
+  //       user: {
+  //         ...session.user,
+  //         id: token.username,
+  //         accessToken: token.accessToken,
+  //         refreshToken: token.refreshToken,
+  //         username: token.username,
+  //       },
+  //     };
+  //   },
+  // },
 });
