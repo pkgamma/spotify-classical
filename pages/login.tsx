@@ -100,7 +100,7 @@ function Login({ providers }: LoginProps) {
                   variant="outline"
                   type="button"
                 >
-                  <Icons.gitHub className="mr-2 h-4 w-4" />
+                  <Icons.moon className="mr-2 h-4 w-4" />
                   {provider.name}
                 </Button>
               ))}
