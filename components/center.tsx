@@ -1,8 +1,28 @@
+import { playlistIdState, playlistState } from "@/atoms/playlistAtom";
+import useSpotify from "@/hooks/useSpotify";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import Songs from "./songs";
 
 function Center() {
   const { data: session } = useSession();
+  const SpotifyApi = useSpotify();
+  const playlistId = useRecoilValue(playlistIdState);
+  const [playlist, setPlaylist] = useRecoilState(playlistState);
+
+  useEffect(() => {
+    SpotifyApi.getPlaylist(playlistId)
+      .then((response) => {
+        setPlaylist(response.body);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [SpotifyApi, playlistId]);
+
+  console.log(playlist);
 
   return (
     <div className="flex-grow">
@@ -19,8 +39,22 @@ function Center() {
       </header>
 
       <section
-        className={`flex items-end space-x-7 bg-black h-80 padding-8`}
-      ></section>
+        className={`flex items-end space-x-7 bg-gray-200 h-80 padding-8`}
+      >
+        <Image
+          src={playlist?.images[0].url}
+          width={200}
+          height={200}
+          alt={playlist?.name}
+        />
+        <div>
+          <h1>{playlist?.name}</h1>
+        </div>
+      </section>
+
+      <div>
+        <Songs />
+      </div>
     </div>
   );
 }

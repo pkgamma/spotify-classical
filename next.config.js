@@ -5,7 +5,12 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ["i.scdn.co", "images.unsplash.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   typescript: {
     // !! WARN !!
