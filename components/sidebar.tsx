@@ -38,7 +38,7 @@ function Sidebar({ className }): JSX.Element {
   }, [session, spotifyApi]);
 
   return (
-    <div className={cn("pb-12 h-screen overflow-scroll", className)}>
+    <div className={cn("pb-12 h-screen overflow-scroll border-r", className)}>
       <div className="space-y-4 py-4">
         <div className="px-4 py-2">
           <h2 className="mb-2 px-2 text-lg font-semibold ">Discover</h2>
@@ -102,6 +102,22 @@ function Sidebar({ className }): JSX.Element {
                   {playlist.name}
                 </Button>
               ))}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full justify-start font-normal truncate"
+              >
+                <ListMusic className="mr-2 h-4 w-4" />
+                Dummy Title
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="w-full justify-start font-normal truncate"
+              >
+                <ListMusic className="mr-2 h-4 w-4" />
+                Dummy Title
+              </Button>
               <Button
                 onClick={() => signOut()}
                 variant="destructive"

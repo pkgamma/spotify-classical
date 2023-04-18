@@ -48,7 +48,9 @@ function Center({ className }): JSX.Element {
           alt={playlist?.name}
         />
         <div>
-          <h1>{playlist?.name}</h1>
+          <h1 className="scroll-m-20 text-4xl font-extrabold lg:text-5xl">
+            {playlist?.name}
+          </h1>
         </div>
       </section>
 
