@@ -52,3 +52,7 @@ This project is licensed under the MIT License. See `LICENSE` for more informati
 ## Authors
 
 - Philip Kuo
+
+## Special Thanks
+
+Special thanks to [this video](https://www.youtube.com/live/3xrko3GpYoU?feature=share) for helping me kickstart this project!
