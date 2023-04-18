@@ -16,7 +16,7 @@ import { playlistIdState } from "@/atoms/playlistAtom";
 import { Separator } from "./ui/separator";
 
 function Sidebar() {
-  const SpotifyApi = useSpotify();
+  const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
@@ -24,8 +24,9 @@ function Sidebar() {
   console.log("clicked on sidebar playlist ID " + playlistId);
 
   useEffect(() => {
-    if (SpotifyApi.getAccessToken()) {
-      SpotifyApi.getUserPlaylists()
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi
+        .getUserPlaylists()
         .then((response) => {
           setPlaylists(response.body.items);
         })
@@ -33,7 +34,7 @@ function Sidebar() {
           console.log(err);
         });
     }
-  }, [session, SpotifyApi]);
+  }, [session, spotifyApi]);
 
   const btnStyle =
     "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer font-medium";

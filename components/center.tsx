@@ -8,21 +8,20 @@ import Songs from "./songs";
 
 function Center() {
   const { data: session } = useSession();
-  const SpotifyApi = useSpotify();
+  const spotifyApi = useSpotify();
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
 
   useEffect(() => {
-    SpotifyApi.getPlaylist(playlistId)
+    spotifyApi
+      .getPlaylist(playlistId)
       .then((response) => {
         setPlaylist(response.body);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [SpotifyApi, playlistId]);
-
-  console.log(playlist);
+  }, [spotifyApi, playlistId]);
 
   return (
     <div className="flex-grow">

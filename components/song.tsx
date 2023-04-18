@@ -4,15 +4,15 @@ import { Separator } from "@radix-ui/react-separator";
 import { useRecoilState } from "recoil";
 
 function Song({ order, track }) {
-  const SpotifyApi = useSpotify();
+  const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const playSong = () => {
-    console.log(track);
+    // console.log(track);
     setCurrentTrackId(track.id);
     setIsPlaying(true);
-    SpotifyApi.play({
+    spotifyApi.play({
       uris: [track.uri],
     });
   };

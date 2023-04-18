@@ -1,15 +1,15 @@
 import SpotifyWebApi from "spotify-web-api-node";
 
-const SpotifyApi = new SpotifyWebApi({
+const spotifyApi = new SpotifyWebApi({
   clientId: process.env.SPOTIFY_CLIENT_ID,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 });
 
 async function refreshAccessToken(token: any) {
   try {
-    SpotifyApi.setAccessToken(token.accessToken);
-    SpotifyApi.setRefreshToken(token.refreshToken);
-    const { body: refreshToken } = await SpotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(token.accessToken);
+    spotifyApi.setRefreshToken(token.refreshToken);
+    const { body: refreshToken } = await spotifyApi.refreshAccessToken();
     token.accessToken = refreshToken.access_token;
     token.accessTokenExpires = Date.now() + refreshToken.expires_in * 1000;
     token.refreshToken = refreshToken.refresh_token ?? token.refreshToken;

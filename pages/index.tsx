@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "@/components/sidebar";
 import Center from "@/components/center";
+import Player from "@/components/player";
 
 export default function HomePage() {
   return (
@@ -10,7 +11,9 @@ export default function HomePage() {
         <Center />
       </main>
 
-      <div>{/* Player */}</div>
+      <div className="sticky bottom-0">
+        <Player />
+      </div>
     </div>
   );
 }
