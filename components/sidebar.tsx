@@ -7,10 +7,10 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { useEffect, useState } from "react";
 import useSpotify from "@/hooks/useSpotify";
+import Link from "next/link";
 
 function Sidebar() {
   const SpotifyApi = useSpotify();
@@ -29,19 +29,17 @@ function Sidebar() {
     }
   }, [session, SpotifyApi]);
 
-  const router = useRouter();
-  const handleLoginClick = () => {
-    router.push("/login");
-  };
-
   const btnStyle =
     "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer font-medium";
 
   return (
     <div className="">
       <div className=" w-64 bg-gray-50 text-gray-800 p-4 border-r border-gray-300 overflow-y-scroll h-screen scrollbar-hide">
-        <div className="">
-          <Button onClick={handleLoginClick}>Login</Button>
+        <div>
+          <Link href="/login" className={buttonVariants()}>
+            Login
+          </Link>
+
           <Button variant="destructive" onClick={() => signOut()}>
             Logout
           </Button>
