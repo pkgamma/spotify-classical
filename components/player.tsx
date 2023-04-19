@@ -47,7 +47,7 @@ function Player() {
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       fetchCurrentSong();
     }
-  }, [currentTrackState, spotifyApi, session]);
+  }, [currentTrackState, spotifyApi, session, currentTrackId]);
 
   return (
     <div>

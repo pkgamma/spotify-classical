@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useOpenOpus from "@/hooks/useOpenOpus";
 import { useRecoilState } from "recoil";
 import { currComposerState, sidebarClickedBtnState } from "@/atoms/states";
 import { getPopularComposers } from "@/lib/openopus";
