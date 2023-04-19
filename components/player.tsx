@@ -1,4 +1,4 @@
-import { currentTrackState, isPlayingState } from "@/atoms/songAtom";
+import { currentTrackState, isPlayingState } from "@/atoms/states";
 import useSongInfo from "@/hooks/useSongInfo";
 import useSpotify from "@/hooks/useSpotify";
 import { useSession } from "next-auth/react";
@@ -53,8 +53,8 @@ function Player() {
     <div>
       <Image
         src={songInfo?.album?.images?.[0].url}
-        width={100}
-        height={100}
+        width={200}
+        height={200}
         alt=""
       />
 

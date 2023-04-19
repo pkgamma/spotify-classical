@@ -14,15 +14,24 @@ import { Button, buttonVariants } from "./ui/button";
 import { useEffect, useState } from "react";
 import useSpotify from "@/hooks/useSpotify";
 import { useRecoilState } from "recoil";
-import { playlistIdState } from "@/atoms/playlistAtom";
+import {
+  currComposerState,
+  playlistIdState,
+  sidebarClickedBtnState,
+} from "@/atoms/states";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 function Sidebar({ className }): JSX.Element {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+  const [sidebarClickedBtn, setSidebarClickedBtn] = useRecoilState(
+    sidebarClickedBtnState
+  );
+  const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -103,22 +112,6 @@ function Sidebar({ className }): JSX.Element {
                 </Button>
               ))}
               <Button
-                variant="ghost"
-                size="sm"
-                className="w-full justify-start font-normal truncate"
-              >
-                <ListMusic className="mr-2 h-4 w-4" />
-                Dummy Title
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="w-full justify-start font-normal truncate"
-              >
-                <ListMusic className="mr-2 h-4 w-4" />
-                Dummy Title
-              </Button>
-              <Button
                 onClick={() => signOut()}
                 variant="destructive"
                 size="sm"
@@ -129,6 +122,16 @@ function Sidebar({ className }): JSX.Element {
               </Button>
             </div>
           </ScrollArea>
+          {/* NAME AND PHOTO */}
+          <div>
+            <h2>{session?.user.name}</h2>
+            <Image
+              src={session?.user.image}
+              alt={session?.user.name}
+              width={70}
+              height={70}
+            />
+          </div>
         </div>
       </div>
     </div>

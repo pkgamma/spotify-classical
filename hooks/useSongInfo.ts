@@ -1,7 +1,6 @@
-import { currentTrackState, isPlayingState } from "@/atoms/songAtom";
+import { currentTrackState, isPlayingState } from "@/atoms/states";
 import useSpotify from "@/hooks/useSpotify";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
