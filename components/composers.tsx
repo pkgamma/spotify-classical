@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { currComposerState, sidebarClickedBtnState } from "@/atoms/states";
-import { getPopularComposers } from "@/lib/openopus";
+import {
+  getComposersByPeriod,
+  getComposersPopular,
+  periodOptions,
+} from "@/lib/openopus";
 
 function Composers() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
   const [composers1, setComposers1] = useState([]);
 
   useEffect(() => {
-    getPopularComposers()
+    getComposersByPeriod(periodOptions.TwentyFirstCentury)
       .then((data) => {
+        console.log(data);
         setComposers1(data);
       })
       .catch((error) => {
