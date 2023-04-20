@@ -12,7 +12,7 @@ function Composers() {
   const [composers1, setComposers1] = useState([]);
 
   useEffect(() => {
-    getComposersByPeriod(periodOptions.TwentyFirstCentury)
+    getComposersByPeriod(periodOptions.LateRomantic)
       .then((data) => {
         console.log(data);
         setComposers1(data);
