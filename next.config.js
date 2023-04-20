@@ -19,4 +19,12 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/cmapi/:path*",
+        destination: "https://api.concertmaster.app/:path*",
+      },
+    ];
+  },
 };

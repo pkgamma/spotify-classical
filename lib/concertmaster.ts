@@ -1,11 +1,5 @@
 async function concertmasterApi(endpoint: string) {
-  const response = await fetch(`https://api.concertmaster.app${endpoint}`, {
-    headers: {
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "https://api.concertmaster.app",
-    },
-  });
+  const response = await fetch(`/cmapi${endpoint}`);
   const data = await response.json();
   return data;
 }
@@ -28,6 +22,7 @@ async function concertmasterApi(endpoint: string) {
 // RewriteRule recording/list/work/(.*)/(.*)/(.*).json dyn/recording/list.phtml?id=$1&offset=$3&extra=$2 [B,L]
 
 export async function getRecordingByWorkID(id: number) {
+  // TODO dynamic id
   const endpoint = `/recording/list/work/${id}/0.json`;
   return await concertmasterApi(endpoint);
 }

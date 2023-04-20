@@ -15,16 +15,16 @@ function TempRecs() {
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
 
   useEffect(() => {
-    getRecordingByWorkID(currWorkId)
+    console.log("Trying to request :" + currWorkId);
+    getRecordingByWorkID(parseInt(currWorkId))
       .then((data) => {
-        console.log(currWorkId);
         setRecs(data);
       })
       .catch((error) => {
         console.log("at file TempRecs.tsx");
         console.error(error);
       });
-  }, [currComposer]);
+  }, [currComposer, currWorkId]);
 
   return (
     <div>
