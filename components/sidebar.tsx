@@ -20,11 +20,10 @@ import {
   sidebarClickedBtnState,
 } from "@/atoms/states";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import TempPlayer from "./TempPlayer";
 
-function Sidebar({ className }): JSX.Element {
+function Sidebar() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
@@ -48,7 +47,7 @@ function Sidebar({ className }): JSX.Element {
   }, [session, spotifyApi]);
 
   return (
-    <div className={cn("pb-12 h-screen overflow-scroll border-r", className)}>
+    <div className="pb-12 h-screen overflow-scroll border-r">
       <div className="space-y-4 py-4">
         <div className="px-4 py-2">
           <h2 className="mb-2 px-2 text-lg font-semibold ">Discover</h2>
