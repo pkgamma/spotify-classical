@@ -15,7 +15,7 @@ function TempRecs() {
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
 
   useEffect(() => {
-    getRecordingByWorkID(parseInt(currWorkId))
+    getRecordingByWorkID(currWorkId)
       .then((data) => {
         console.log(currWorkId);
         setRecs(data);

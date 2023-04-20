@@ -1,5 +1,11 @@
 async function concertmasterApi(endpoint: string) {
-  const response = await fetch(`https://api.concertmaster.app${endpoint}`);
+  const response = await fetch(`https://api.concertmaster.app${endpoint}`, {
+    headers: {
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "https://api.concertmaster.app",
+    },
+  });
   const data = await response.json();
   return data;
 }

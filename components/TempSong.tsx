@@ -19,7 +19,7 @@ function TempSong({ order, track }) {
   return (
     <div>
       <div onClick={playSong}>
-        {order} {track.name}
+        {order} | {track.name}
       </div>
     </div>
   );

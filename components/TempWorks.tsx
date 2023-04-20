@@ -30,8 +30,7 @@ function TempWorks() {
         {works?.works &&
           works?.works.map((work) => (
             <li onClick={() => setCurrWorkId(work.id)} key={work.id}>
-              {" "}
-              {work.title}{" "}
+              {work.title}
             </li>
           ))}
       </ul>
