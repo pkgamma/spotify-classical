@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "@/components/Sidebar";
 import TempSpotifyPlaylist from "@/components/TempSpotifyPlaylist";
 import TempComposers from "@/components/TempComposers";
 import TempWorks from "@/components/TempWorks";
 import TempRecs from "@/components/TempRecs";
+import Sidebar from "@/components/Sidebar";
 
 export default function HomePage() {
   return (
