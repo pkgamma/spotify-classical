@@ -22,6 +22,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import TempPlayer from "./TempPlayer";
 
 function Sidebar({ className }): JSX.Element {
   const spotifyApi = useSpotify();
@@ -125,13 +126,17 @@ function Sidebar({ className }): JSX.Element {
           {/* NAME AND PHOTO */}
           <div>
             <h2>{session?.user.name}</h2>
-            <Image
-              src={session?.user.image}
-              alt={session?.user.name}
-              width={70}
-              height={70}
-            />
+            {session?.user.image && (
+              <Image
+                src={session?.user.image}
+                alt={session?.user.name}
+                width={70}
+                height={70}
+              />
+            )}
           </div>
+          {/* player */}
+          <TempPlayer />
         </div>
       </div>
     </div>

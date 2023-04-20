@@ -12,7 +12,7 @@ export const isPlayingState = atom({
 
 export const playlistIdState = atom({
   key: "playlistIdState",
-  default: "37i9dQZF1DWSRc3WJklgBs",
+  default: null,
 });
 
 export const playlistState = atom({
@@ -27,5 +27,10 @@ export const sidebarClickedBtnState = atom({
 
 export const currComposerState = atom({
   key: "currComposerState",
+  default: null,
+});
+
+export const currWorkIdState = atom({
+  key: "currWorkIdState",
   default: null,
 });

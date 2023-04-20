@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-function Player() {
+function TempPlayer() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
@@ -51,12 +51,14 @@ function Player() {
 
   return (
     <div>
-      <Image
-        src={songInfo?.album?.images?.[0].url}
-        width={200}
-        height={200}
-        alt=""
-      />
+      {songInfo && (
+        <Image
+          src={songInfo?.album?.images?.[0].url}
+          width={200}
+          height={200}
+          alt=""
+        />
+      )}
 
       {isPlaying ? (
         <button onClick={handlePlayPause}>Pause</button>
@@ -67,4 +69,4 @@ function Player() {
   );
 }
 
-export default Player;
+export default TempPlayer;

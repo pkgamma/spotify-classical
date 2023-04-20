@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cn } from "@/lib/utils";
-import Song from "./song";
+import TempSong from "./TempSong";
 
-function Center({ className }): JSX.Element {
+function TempSpotifyPlaylist({ className }): JSX.Element {
   const spotifyApi = useSpotify();
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
@@ -37,7 +37,7 @@ function Center({ className }): JSX.Element {
           <div>
             <div>
               {playlist?.tracks.items.map((item, i) => (
-                <Song key={item.track.id} track={item.track} order={i} />
+                <TempSong key={item.track.id} track={item.track} order={i} />
               ))}
             </div>
           </div>
@@ -47,4 +47,4 @@ function Center({ className }): JSX.Element {
   );
 }
 
-export default Center;
+export default TempSpotifyPlaylist;

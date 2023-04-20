@@ -14,19 +14,9 @@ async function refreshAccessToken(token: any) {
     token.accessTokenExpires = Date.now() + refreshToken.expires_in * 1000;
     token.refreshToken = refreshToken.refresh_token ?? token.refreshToken;
     return token;
-    // return {
-    //   ...token,
-    //   accessToken: refreshToken.access_token,
-    //   accessTokenExpires: Date.now() + refreshToken.expires_in * 1000,
-    //   refreshToken: refreshToken.refresh_token ?? token.refreshToken,
-    // };
   } catch (error) {
     token.error = "RefreshAccessTokenError";
     return token;
-    // return {
-    //   ...token,
-    //   error: "RefreshAccessTokenError",
-    // };
   }
 }
 

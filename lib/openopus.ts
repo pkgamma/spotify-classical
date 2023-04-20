@@ -1,11 +1,13 @@
 // =============================================================
 // Main helper function that fetches data from the Open Opus API
 // =============================================================
-async function openOpusApi(endpoint) {
+
+async function openOpusApi(endpoint: string) {
   const response = await fetch(`https://api.openopus.org${endpoint}`);
   const data = await response.json();
   return data;
 }
+
 // =============================================================
 
 export const periodOptions = {
@@ -19,12 +21,6 @@ export const periodOptions = {
   TwentiethCentury: "20th Century",
   PostWar: "Post-War",
   TwentyFirstCentury: "21st Century",
-};
-
-export const listOptions = {
-  Popular: "Popular",
-  Essential: "Recommended",
-  All: "all",
 };
 
 export const genreOptions = {
@@ -77,12 +73,18 @@ export async function getGenresByComposerID(id: number) {
 
 // =============================================================
 
-export async function getWorksByComposerID(
-  id: number,
-  listOption: keyof typeof listOptions
-) {
-  console.log("listOption " + listOption);
-  const endpoint = `/work/list/composer/${id}/genre/${listOption}.json`;
+export async function getWorksByComposerID(id: number) {
+  const endpoint = `/work/list/composer/${id}/genre/all.json`;
+  return await openOpusApi(endpoint);
+}
+
+export async function getWorksByComposerIDPopular(id: number) {
+  const endpoint = `/work/list/composer/${id}/genre/Popular.json`;
+  return await openOpusApi(endpoint);
+}
+
+export async function getWorksByComposerIDEssential(id: number) {
+  const endpoint = `/work/list/composer/${id}/genre/Recommended.json`;
   return await openOpusApi(endpoint);
 }
 
