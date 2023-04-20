@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <div className="">
       <main className="grid grid-cols-4">
-        <Sidebar />
+        <Sidebar className={undefined} />
         <TempComposers />
         <TempWorks />
         <TempRecs />
