@@ -22,7 +22,7 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: "/cmapi/:path*",
+        source: "/concertmasterApiProxyPath/:path*",
         destination: "https://api.concertmaster.app/:path*",
       },
     ];
