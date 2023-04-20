@@ -29,6 +29,7 @@ function TempRecs() {
   return (
     <div>
       <h1 className="text-2xl font-bold">Recordings</h1>
+      <h1>Current work ID: {currWorkId}</h1>
       <ul>
         {recs.recordings &&
           recs?.recordings.map((rec) => (

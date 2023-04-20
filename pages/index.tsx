@@ -8,8 +8,8 @@ import TempRecs from "@/components/TempRecs";
 export default function HomePage() {
   return (
     <div className="">
-      <main className="grid lg:grid-cols-5">
-        <Sidebar className="col-span-1" />
+      <main className="grid grid-cols-4">
+        <Sidebar />
         <TempComposers />
         <TempWorks />
         <TempRecs />
