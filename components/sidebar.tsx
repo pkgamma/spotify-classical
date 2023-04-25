@@ -16,12 +16,16 @@ import useSpotify from "@/hooks/useSpotify";
 import { useRecoilState } from "recoil";
 import {
   currComposerState,
+  currPeriodState,
   playlistIdState,
   sidebarClickedBtnState,
 } from "@/atoms/states";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import TempPlayer from "./TempPlayer";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LogoutIcon } from "@heroicons/react/outline";
+import { periodOptions } from "@/lib/openopus";
 
 function Sidebar() {
   const spotifyApi = useSpotify();
@@ -31,7 +35,7 @@ function Sidebar() {
   const [sidebarClickedBtn, setSidebarClickedBtn] = useRecoilState(
     sidebarClickedBtnState
   );
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
+  const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -50,92 +54,139 @@ function Sidebar() {
     <div className="pb-12 h-screen overflow-scroll border-r">
       <div className="space-y-4 py-4">
         <div className="px-4 py-2">
-          <h2 className="mb-2 px-2 text-lg font-semibold ">Discover</h2>
+          <h2 className="mb-2 px-2 text-lg font-semibold ">Period</h2>
           <div className="space-y-1">
             <Button
-              variant="secondary"
+              onClick={() => setCurrPeriod(periodOptions.Medieval)}
+              variant="ghost"
               size="sm"
               className="w-full justify-start"
             >
-              <PlayCircle className="mr-2 h-4 w-4" />
-              Listen Now
-            </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <LayoutGrid className="mr-2 h-4 w-4" />
-              Browse
-            </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <Radio className="mr-2 h-4 w-4" />
-              Radio
-            </Button>
-          </div>
-        </div>
-        <div className="px-4 py-2">
-          <h2 className="mb-2 px-2 text-lg font-semibold ">Library</h2>
-          <div className="space-y-1">
-            <Button variant="ghost" size="sm" className="w-full justify-start">
               <ListMusic className="mr-2 h-4 w-4" />
-              Playlists
+              Medieval
             </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <Music2 className="mr-2 h-4 w-4" />
-              Songs
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.Renaissance)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Renaissance
             </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <User className="mr-2 h-4 w-4" />
-              Made for You
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.Baroque)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Baroque
             </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <Mic2 className="mr-2 h-4 w-4" />
-              Artists
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.Classical)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Classical
             </Button>
-            <Button variant="ghost" size="sm" className="w-full justify-start">
-              <Library className="mr-2 h-4 w-4" />
-              Albums
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.EarlyRomantic)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Early Romantic
+            </Button>
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.Romantic)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Romantic
+            </Button>
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.LateRomantic)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Late Romantic
+            </Button>
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.TwentiethCentury)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              20th Century
+            </Button>
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.PostWar)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              Post-War
+            </Button>
+            <Button
+              onClick={() => setCurrPeriod(periodOptions.TwentyFirstCentury)}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+            >
+              <ListMusic className="mr-2 h-4 w-4" />
+              21st Century
             </Button>
           </div>
         </div>
-        <div className="py-2">
-          <h2 className="relative px-6 text-lg font-semibold ">Playlists</h2>
-          <ScrollArea className="h-[300px] px-2">
-            <div className="space-y-1 p-2">
-              {playlists?.map((playlist) => (
-                <Button
-                  key={playlist.id}
-                  onClick={() => setPlaylistId(playlist.id)}
-                  variant="ghost"
-                  size="sm"
-                  className="w-full justify-start font-normal truncate"
-                >
-                  <ListMusic className="mr-2 h-4 w-4" />
-                  {playlist.name}
-                </Button>
-              ))}
+
+        {/* <div className="px-4 py-2">
+          <h2 className="mb-2 px-2 text-lg font-semibold ">
+            Spotify Playlists
+          </h2>
+          <div className="space-y-1">
+            {playlists?.map((playlist) => (
               <Button
-                onClick={() => signOut()}
-                variant="destructive"
+                key={playlist.id}
+                onClick={() => setPlaylistId(playlist.id)}
+                variant="ghost"
                 size="sm"
                 className="w-full justify-start"
               >
-                <Radio className="mr-2 h-4 w-4" />
-                Sign Out
+                <ListMusic className="mr-2 h-4 w-4" />
+                {playlist.name}
               </Button>
-            </div>
-          </ScrollArea>
-          {/* NAME AND PHOTO */}
-          <div>
-            <h2>{session?.user.name}</h2>
-            {session?.user.image && (
-              <Image
-                src={session?.user.image}
-                alt={session?.user.name}
-                width={70}
-                height={70}
-              />
-            )}
+            ))}
           </div>
-          {/* player */}
-          <TempPlayer />
+        </div> */}
+
+        <div className="fixed bottom-0 left-0 pl-4 pr-4 pb-4">
+          <div className="relative">
+            <div className="box-border min-w-0 no-underline text-sm leading-6 rounded-md cursor-pointer flex w-full items-center">
+              <div className="flex items-center justify-start p-2">
+                <Avatar className="w-6 h-6 block relative">
+                  <AvatarImage src={session?.user.image} />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <p className="min-w-0 ml-2 whitespace-no-wrap overflow-hidden">
+                  {session?.user.name}
+                </p>
+              </div>
+              <LogoutIcon
+                onClick={() => signOut()}
+                className="w-4 h-4"
+              ></LogoutIcon>
+            </div>
+          </div>
         </div>
       </div>
     </div>

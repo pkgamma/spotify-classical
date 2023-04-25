@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { currComposerState, sidebarClickedBtnState } from "@/atoms/states";
+import {
+  currComposerState,
+  currPeriodState,
+  sidebarClickedBtnState,
+} from "@/atoms/states";
 import {
   getComposersByPeriod,
   getComposersPopular,
@@ -10,16 +14,17 @@ import {
 function TempComposers() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
   const [composers1, setComposers1] = useState([]);
+  const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodState);
 
   useEffect(() => {
-    getComposersByPeriod(periodOptions.LateRomantic)
+    getComposersByPeriod(currPeriod)
       .then((data) => {
         setComposers1(data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [setComposers1]);
+  }, [currPeriod]);
 
   return (
     <div>
