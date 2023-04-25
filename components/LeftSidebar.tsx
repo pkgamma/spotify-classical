@@ -9,7 +9,7 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import { periodOptions } from "@/lib/openopus";
 import { cn } from "@/lib/utils";
 
-function Sidebar({ className }) {
+export default function LeftSidebar({ className }) {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
@@ -90,5 +90,3 @@ function Sidebar({ className }) {
     </div>
   );
 }
-
-export default Sidebar;
