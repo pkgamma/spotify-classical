@@ -7,13 +7,12 @@ import Sidebar from "@/components/Sidebar";
 
 export default function HomePage() {
   return (
-    <div className="">
-      <main className="grid grid-cols-4">
-        <Sidebar />
+    <div>
+      <Sidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
+      <main className="pl-56 grid grid-cols-4 m-4">
         <TempComposers />
         <TempWorks />
         <TempRecs />
-        {/* <TempSpotifyPlaylist /> */}
       </main>
     </div>
   );

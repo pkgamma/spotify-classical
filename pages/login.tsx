@@ -2,21 +2,14 @@ import * as React from "react";
 import { GetServerSidePropsContext } from "next";
 import { getProviders, getSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
-import { Metadata } from "next";
 import Link from "next/link";
-import { HomeIcon } from "@heroicons/react/outline";
-
-export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
-};
+import { ListIcon } from "lucide-react";
 
 interface LoginProps {
   providers: Record<string, any>;
 }
 
-function Login({ providers }: LoginProps) {
+export default function Login({ providers }: LoginProps) {
   return (
     <>
       <div className="md:hidden">
@@ -75,7 +68,7 @@ function Login({ providers }: LoginProps) {
                   variant="outline"
                   type="button"
                 >
-                  <HomeIcon className="mr-2 h-4 w-4" />
+                  <ListIcon className="mr-2 h-4 w-4" />
                   {provider.name}
                 </Button>
               ))}
@@ -104,8 +97,6 @@ function Login({ providers }: LoginProps) {
     </>
   );
 }
-
-export default Login;
 
 export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   const providers = await getProviders();

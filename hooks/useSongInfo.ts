@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-function useSongInfo() {
+export default function useSongInfo() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
@@ -32,5 +32,3 @@ function useSongInfo() {
 
   return songInfo;
 }
-
-export default useSongInfo;

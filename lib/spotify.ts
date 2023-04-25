@@ -5,7 +5,7 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 });
 
-async function refreshAccessToken(token: any) {
+export default async function refreshAccessToken(token: any) {
   try {
     spotifyApi.setAccessToken(token.accessToken);
     spotifyApi.setRefreshToken(token.refreshToken);
@@ -19,5 +19,3 @@ async function refreshAccessToken(token: any) {
     return token;
   }
 }
-
-export default refreshAccessToken;
