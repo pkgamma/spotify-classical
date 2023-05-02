@@ -38,8 +38,8 @@ export default function Layout({ children, title = "Default Title" }: Props) {
       <Head>
         <title>{title}</title>
       </Head>
-      <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-56 mx-auto max-w-6xl">{children}</main>
+      <LeftSidebar className="border-r w-60 fixed left-0 top-0 bottom-0 overflow-auto" />
+      <main className="pl-60 mx-auto max-w-6xl">{children}</main>
       <footer>{/* add any common footer components here */}</footer>
     </div>
   );
