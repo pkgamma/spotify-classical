@@ -18,8 +18,8 @@ export default function Layout({ children, title = "Default Title" }: Props) {
         <Head>
           <title>Loading...</title>
         </Head>
-        <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-        <main className="pl-56 mx-auto max-w-6xl">
+        <LeftSidebar className="border-r w-60 fixed left-0 top-0 bottom-0 overflow-auto" />
+        <main className="pl-60 mx-auto max-w-6xl">
           <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col items-center justify-center">
               <div className="animate-spin">

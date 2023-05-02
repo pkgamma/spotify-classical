@@ -27,7 +27,7 @@ export default function Login({ providers }: LoginProps) {
             }}
           />
           <div className="relative z-20 flex items-center text-lg font-medium">
-            Spotify Classics
+            SymphonyNow
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">

@@ -1,6 +1,6 @@
-# Spotify Classical
+# SymphonyNow
 
-Spotify Classical is a web application built with Next.js and React that aims to make classical music more accessible to a wider audience. The application utilizes the Open Opus API and Spotify API to provide users with access to a vast collection of classical music metadata and Spotify playback capabilities.
+SymphonyNow is a web application built with Next.js and React that aims to make classical music more accessible to a wider audience. The application utilizes the Open Opus API and Spotify API to provide users with access to a vast collection of classical music metadata and Spotify playback capabilities.
 
 ## Features
 

@@ -6,7 +6,7 @@ import PageTitle from "@/components/PageTitle";
 
 export default function HomePage() {
   return (
-    <Layout title="Spotify Classical">
+    <Layout title="SymphonyNow">
       <PageTitle title="Welcome" />
     </Layout>
   );

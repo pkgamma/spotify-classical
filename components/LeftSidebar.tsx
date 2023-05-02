@@ -33,7 +33,7 @@ export default function LeftSidebar({ className }) {
     <div className={cn("", className)}>
       <div className="px-4">
         <h2 className="text-md font-bold h-20 flex items-center pl-4 mb-2">
-          <Link href="/">Spotify Classical</Link>
+          <Link href="/">SymphonyNow</Link>
         </h2>
         <div className="space-y-1">
           {Object.entries(periodOptions).map(([key, value]) => (
