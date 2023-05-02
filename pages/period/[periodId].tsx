@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Row from "@/components/Row";
 import PageTitle from "@/components/PageTitle";
+import Layout from "@/components/Layout";
 
 export default function Period() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
@@ -41,27 +42,24 @@ export default function Period() {
   }, [router]);
 
   return (
-    <div>
-      <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-56">
-        <PageTitle title={`Composers of the ${currPeriod} Period`} />
-        <ul>
-          {composers1?.composers &&
-            composers1?.composers.map((composer) => (
-              <Link
-                href={`/composer/${composer.id}`}
-                onClick={() => setCurrComposer(composer.id)}
-                key={composer.id}
-              >
-                <Row
-                  cover={composer.portrait}
-                  title={composer.name}
-                  subtitle={composer.complete_name}
-                />
-              </Link>
-            ))}
-        </ul>
-      </main>
-    </div>
+    <Layout title={`Composers of the ${currPeriod} Period`}>
+      <PageTitle title={`Composers of the ${currPeriod} Period`} />
+      <ul>
+        {composers1?.composers &&
+          composers1?.composers.map((composer) => (
+            <Link
+              href={`/composer/${composer.id}`}
+              onClick={() => setCurrComposer(composer.id)}
+              key={composer.id}
+            >
+              <Row
+                cover={composer.portrait}
+                title={composer.name}
+                subtitle={composer.complete_name}
+              />
+            </Link>
+          ))}
+      </ul>
+    </Layout>
   );
 }

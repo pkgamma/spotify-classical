@@ -6,15 +6,19 @@ export default function PageTitle({ title }) {
   const router = useRouter();
 
   return (
-    <div className="py-4 px-4">
-      <h1 className="text-2xl font-bold">{title}</h1>
-      <Button
-        className="mt-4"
-        variant="secondary"
-        onClick={() => router.back()}
-      >
-        <ChevronLeft className="w-4 h-4" /> Back
-      </Button>
+    <div className="mt-12">
+      <header className="flex flex-col items-center mb-12 text-center">
+        <h1 className="text-center p-0 box-border m-0 min-w-0 text-2xl font-bold pl-12 pr-12">
+          {title}
+        </h1>
+        <Button
+          className="mt-4"
+          variant="secondary"
+          onClick={() => router.back()}
+        >
+          <ChevronLeft className="w-4 h-4" /> Back
+        </Button>
+      </header>
     </div>
   );
 }

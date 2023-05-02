@@ -17,6 +17,7 @@ import { getRecordingByWorkID } from "@/lib/concertmaster";
 import useSpotify from "@/hooks/useSpotify";
 import Row from "@/components/Row";
 import PageTitle from "@/components/PageTitle";
+import Layout from "@/components/Layout";
 
 export default function Album() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
@@ -54,18 +55,15 @@ export default function Album() {
   };
 
   return (
-    <div>
-      <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-56">
-        <PageTitle title={`Spotify Album "${album.name}"`} />
-        <ul>
-          {album?.tracks?.items.map((item) => (
-            <div onClick={() => playSong(item.uri)} key={item.id}>
-              <Row cover={null} title={item.name} subtitle={"Subtitle"} />
-            </div>
-          ))}
-        </ul>
-      </main>
-    </div>
+    <Layout title={`Spotify Album "${album.name}"`}>
+      <PageTitle title={`Spotify Album "${album.name}"`} />
+      <ul>
+        {album?.tracks?.items.map((item) => (
+          <div onClick={() => playSong(item.uri)} key={item.id}>
+            <Row cover={null} title={item.name} subtitle={"Subtitle"} />
+          </div>
+        ))}
+      </ul>
+    </Layout>
   );
 }

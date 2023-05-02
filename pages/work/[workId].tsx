@@ -16,6 +16,7 @@ import { getRecordingByWorkID } from "@/lib/concertmaster";
 import Image from "next/image";
 import Row from "@/components/Row";
 import PageTitle from "@/components/PageTitle";
+import Layout from "@/components/Layout";
 
 export default function Recordings() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
@@ -39,12 +40,11 @@ export default function Recordings() {
   }, [router]);
 
   return (
-    <div>
-      <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-56">
-        <PageTitle title={`Recordings of ${recs?.work?.title}`} />
-        <div className="flex flex-col">
-          {recs?.recordings &&
+    <Layout>
+      <PageTitle title={`Recordings of ${recs?.work?.title}`} />
+      <ul>
+        {recs?.work?.title &&
+          (recs?.recordings?.length > 0 ? (
             recs?.recordings?.map((rec) => (
               <Link
                 href={`/album/${rec.spotify_albumid}`}
@@ -57,9 +57,11 @@ export default function Recordings() {
                   subtitle={rec.year}
                 />
               </Link>
-            ))}
-        </div>
-      </main>
-    </div>
+            ))
+          ) : (
+            <Row cover={null} title={"No recordings found"} subtitle={null} />
+          ))}
+      </ul>
+    </Layout>
   );
 }

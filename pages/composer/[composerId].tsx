@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Row from "@/components/Row";
 import PageTitle from "@/components/PageTitle";
+import Layout from "@/components/Layout";
 
 export default function Works() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
@@ -30,23 +31,20 @@ export default function Works() {
   }, [router]);
 
   return (
-    <div>
-      <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-56">
-        <PageTitle title={`Works of Composer ${works?.composer?.name}`} />
-        <ul>
-          {works?.works &&
-            works?.works.map((work) => (
-              <Link
-                href={`/work/${work.id}`}
-                onClick={() => setCurrWorkId(work.id)}
-                key={work.id}
-              >
-                <Row cover={null} title={work.title} subtitle={"Subtitle"} />
-              </Link>
-            ))}
-        </ul>
-      </main>
-    </div>
+    <Layout title={`Works of Composer ${works?.composer?.name}`}>
+      <PageTitle title={`Works of Composer ${works?.composer?.name}`} />
+      <ul>
+        {works?.works &&
+          works?.works.map((work) => (
+            <Link
+              href={`/work/${work.id}`}
+              onClick={() => setCurrWorkId(work.id)}
+              key={work.id}
+            >
+              <Row cover={null} title={work.title} subtitle={"Subtitle"} />
+            </Link>
+          ))}
+      </ul>
+    </Layout>
   );
 }
