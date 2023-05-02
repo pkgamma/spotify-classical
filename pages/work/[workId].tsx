@@ -31,7 +31,7 @@ export default function Recordings() {
   }, [router]);
 
   return (
-    <Layout>
+    <Layout title={`${recs?.work?.title}`}>
       <PageTitle title={`Recordings of ${recs?.work?.title}`} />
       <ul>
         {recs?.work?.title &&

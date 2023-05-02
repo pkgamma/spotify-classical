@@ -36,7 +36,7 @@ export default function Works() {
   }, [router]);
 
   return (
-    <Layout title={`Works of Composer ${works?.composer?.name}`}>
+    <Layout title={`${works?.composer?.name}`}>
       <PageTitle title={`Works of Composer ${works?.composer?.name}`} />
       <ul>
         {works?.works &&

@@ -36,7 +36,7 @@ export default function Period() {
   }, [router]);
 
   return (
-    <Layout title={`Composers of the ${currPeriod} Period`}>
+    <Layout title={`${currPeriod} Period`}>
       <PageTitle title={`Composers of the ${currPeriod} Period`} />
       <ul>
         {composers?.map((composer) => (

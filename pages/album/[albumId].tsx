@@ -83,8 +83,8 @@ export default function Album() {
   };
 
   return (
-    <Layout title={`Spotify Album "${album.name}"`}>
-      <PageTitle title={`Spotify Album "${album.name}"`} />
+    <Layout title={`${album.name}`}>
+      <PageTitle title={`"${album.name}" on Spotify`} />
       <ul>
         {album?.tracks?.items.map((item) => (
           <div onClick={() => playSong(item.uri)} key={item.id}>
