@@ -15,18 +15,20 @@ export default function Recordings() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
-    setIsLoaded(false);
-    const { workId } = router.query;
-    getRecordingByWorkID(parseInt(workId))
-      .then((data) => {
-        setRecs(data);
-        setIsLoaded(true);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log("at file TempRecs.tsx");
-        console.error(error);
-      });
+    if (router.isReady) {
+      setIsLoaded(false);
+      const { workId } = router.query;
+      getRecordingByWorkID(parseInt(workId))
+        .then((data) => {
+          setRecs(data);
+          setIsLoaded(true);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log("at file TempRecs.tsx");
+          console.error(error);
+        });
+    }
   }, [router]);
 
   return (

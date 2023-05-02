@@ -78,10 +78,10 @@ export default function LeftSidebar({ className }) {
               <div className="flex items-center justify-start p-2">
                 <Avatar className="w-6 h-6 block relative">
                   <AvatarImage src={session?.user.image} />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback></AvatarFallback>
                 </Avatar>
                 <p className="min-w-0 ml-2 whitespace-no-wrap overflow-hidden">
-                  {session?.user.name}
+                  {session ? session?.user.name : "Guest"}
                 </p>
               </div>
               <LogoutIcon

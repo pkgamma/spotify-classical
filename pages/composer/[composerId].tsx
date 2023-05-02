@@ -20,17 +20,19 @@ export default function Works() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
-    setIsLoaded(false);
-    const { composerId } = router.query;
-    getWorksByComposerID(parseInt(composerId))
-      .then((data) => {
-        setWorks(data);
-        setIsLoaded(true);
-        console.log(works);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (router.isReady) {
+      setIsLoaded(false);
+      const { composerId } = router.query;
+      getWorksByComposerID(parseInt(composerId))
+        .then((data) => {
+          setWorks(data);
+          setIsLoaded(true);
+          console.log(works);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, [router]);
 
   return (

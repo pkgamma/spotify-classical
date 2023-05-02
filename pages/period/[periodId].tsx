@@ -20,17 +20,19 @@ export default function Period() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
-    setIsLoaded(false);
-    const { periodId } = router.query;
-    setCurrPeriod(periodId);
-    getComposersByPeriod(periodId)
-      .then((data) => {
-        setComposers(data.composers);
-        setIsLoaded(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (router.isReady) {
+      setIsLoaded(false);
+      const { periodId } = router.query;
+      setCurrPeriod(periodId);
+      getComposersByPeriod(periodId)
+        .then((data) => {
+          setComposers(data.composers);
+          setIsLoaded(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, [router]);
 
   return (
