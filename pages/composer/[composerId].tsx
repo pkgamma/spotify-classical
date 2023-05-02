@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import useOpenOpus from "@/hooks/useOpenOpus";
 import { useRecoilState } from "recoil";
-import {
-  currComposerState,
-  currWorkIdState,
-  sidebarClickedBtnState,
-} from "@/atoms/states";
+import { currComposerIdState, currWorkIdState } from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
 import { useRouter } from "next/router";
 import LeftSidebar from "@/components/LeftSidebar";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Row from "@/components/Row";
+import PageTitle from "@/components/PageTitle";
 
 export default function Works() {
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
+  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
   const [works, setWorks] = useState([]);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
@@ -23,8 +21,8 @@ export default function Works() {
     const { composerId } = router.query;
     getWorksByComposerID(parseInt(composerId))
       .then((data) => {
-        // console.log(data);
         setWorks(data);
+        console.log(works);
       })
       .catch((error) => {
         console.error(error);
@@ -35,16 +33,17 @@ export default function Works() {
     <div>
       <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
       <main className="pl-56">
-        <h1 className="text-2xl font-bold">
-          Works of Composer {works?.composer?.name}
-        </h1>
-        <Button onClick={() => router.back()}>back</Button>
+        <PageTitle title={`Works of Composer ${works?.composer?.name}`} />
         <ul>
           {works?.works &&
             works?.works.map((work) => (
-              <li onClick={() => setCurrWorkId(work.id)} key={work.id}>
-                <Link href={`/work/${work.id}`}>{work.title}</Link>
-              </li>
+              <Link
+                href={`/work/${work.id}`}
+                onClick={() => setCurrWorkId(work.id)}
+                key={work.id}
+              >
+                <Row cover={null} title={work.title} subtitle={"Subtitle"} />
+              </Link>
             ))}
         </ul>
       </main>

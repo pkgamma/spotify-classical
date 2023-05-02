@@ -1,4 +1,4 @@
-import { currentTrackState, isPlayingState } from "@/atoms/states";
+import { currTrackIdState, isPlayingState } from "@/atoms/states";
 import useSongInfo from "@/hooks/useSongInfo";
 import useSpotify from "@/hooks/useSpotify";
 import { useSession } from "next-auth/react";
@@ -6,10 +6,10 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-function TempPlayer() {
+export default function TempNowPlaying() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
-  const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
+  const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const songInfo = useSongInfo();
@@ -47,7 +47,7 @@ function TempPlayer() {
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       fetchCurrentSong();
     }
-  }, [currentTrackState, spotifyApi, session, currentTrackId]);
+  }, [currTrackIdState, spotifyApi, session, currentTrackId]);
 
   return (
     <div>
@@ -68,5 +68,3 @@ function TempPlayer() {
     </div>
   );
 }
-
-export default TempPlayer;

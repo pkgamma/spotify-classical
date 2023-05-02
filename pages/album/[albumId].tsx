@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import useOpenOpus from "@/hooks/useOpenOpus";
 import { useRecoilState } from "recoil";
 import {
-  currComposerState,
+  currComposerIdState,
   currWorkIdState,
-  currentTrackState,
+  currTrackIdState,
   isPlayingState,
-  sidebarClickedBtnState,
 } from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
 import { useRouter } from "next/router";
@@ -16,16 +15,18 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getRecordingByWorkID } from "@/lib/concertmaster";
 import useSpotify from "@/hooks/useSpotify";
+import Row from "@/components/Row";
+import PageTitle from "@/components/PageTitle";
 
 export default function Album() {
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
+  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
   const [works, setWorks] = useState([]);
   const [recs, setRecs] = useState([]);
   const [album, setAlbum] = useState([]);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
   const spotifyApi = useSpotify();
-  const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
+  const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Album() {
         .then(function (data) {
           console.log(data.body);
           setAlbum(data.body);
+          // console.log(album);
         })
         .catch(function (error) {
           console.error(error);
@@ -44,7 +46,6 @@ export default function Album() {
   }, [router]);
 
   const playSong = (uri) => {
-    // console.log(uri);
     setCurrentTrackId(uri);
     setIsPlaying(true);
     spotifyApi.play({
@@ -56,13 +57,12 @@ export default function Album() {
     <div>
       <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
       <main className="pl-56">
-        <h1 className="text-2xl font-bold">{`Spotify Album "${album.name}"`}</h1>
-        <Button onClick={() => router.back()}>back</Button>
+        <PageTitle title={`Spotify Album "${album.name}"`} />
         <ul>
           {album?.tracks?.items.map((item) => (
-            <li onClick={() => playSong(item.uri)} key={item.id}>
-              {`${item.track_number}. ${item.name}`}
-            </li>
+            <div onClick={() => playSong(item.uri)} key={item.id}>
+              <Row cover={null} title={item.name} subtitle={"Subtitle"} />
+            </div>
           ))}
         </ul>
       </main>

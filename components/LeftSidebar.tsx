@@ -3,19 +3,18 @@ import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import useSpotify from "@/hooks/useSpotify";
 import { useRecoilState } from "recoil";
-import { currPeriodState } from "@/atoms/states";
+import { currPeriodIdState } from "@/atoms/states";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { periodOptions } from "@/lib/openopus";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import TempPlayer from "./TempPlayer";
 
 export default function LeftSidebar({ className }) {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
-  const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodState);
+  const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodIdState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -40,16 +39,19 @@ export default function LeftSidebar({ className }) {
           {Object.entries(periodOptions).map(([key, value]) => (
             <Button
               key={key}
-              // onClick={() => setCurrPeriod(value)}
               variant="ghost"
               className="w-full justify-start font-normal"
             >
-              <Link href={`/period/${value}`}>{value}</Link>
+              <Link
+                onClick={() => setCurrPeriod(value)}
+                href={`/period/${value}`}
+              >
+                {value}
+              </Link>
             </Button>
           ))}
         </div>
 
-        <TempPlayer />
         {/* <div className="px-4 py-2">
           <h2 className="mb-2 px-2 text-lg font-semibold ">
             Spotify Playlists

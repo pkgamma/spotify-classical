@@ -1,6 +1,6 @@
 import React from "react";
 import LeftSidebar from "@/components/LeftSidebar";
-import TempPlayer from "@/components/TempPlayer";
+import TempPlayer from "@/components/TempNowPlaying";
 
 export default function HomePage() {
   return (
