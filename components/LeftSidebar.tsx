@@ -9,8 +9,11 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import { periodOptions } from "@/lib/openopus";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { LogInIcon } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function LeftSidebar({ className }) {
+  const router = useRouter();
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
@@ -78,16 +81,23 @@ export default function LeftSidebar({ className }) {
               <div className="flex items-center justify-start p-2">
                 <Avatar className="w-6 h-6 block relative">
                   <AvatarImage src={session?.user.image} />
-                  <AvatarFallback></AvatarFallback>
+                  <AvatarFallback>G</AvatarFallback>
                 </Avatar>
                 <p className="min-w-0 ml-2 whitespace-no-wrap overflow-hidden">
                   {session ? session?.user.name : "Guest"}
                 </p>
               </div>
-              <LogoutIcon
-                onClick={() => signOut()}
-                className="w-4 h-4"
-              ></LogoutIcon>
+              {session ? (
+                <LogoutIcon
+                  onClick={() => signOut()}
+                  className="w-4 h-4"
+                ></LogoutIcon>
+              ) : (
+                <LogInIcon
+                  onClick={() => router.push("/login")}
+                  className="w-4 h-4"
+                ></LogInIcon>
+              )}
             </div>
           </div>
         </div>
