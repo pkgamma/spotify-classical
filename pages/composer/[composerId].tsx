@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import useOpenOpus from "@/hooks/useOpenOpus";
 import { useRecoilState } from "recoil";
-import { currComposerIdState, currWorkIdState } from "@/atoms/states";
+import {
+  currComposerIdState,
+  currWorkIdState,
+  isLoadedState,
+} from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
 import { useRouter } from "next/router";
 import LeftSidebar from "@/components/LeftSidebar";
@@ -17,12 +21,15 @@ export default function Works() {
   const [works, setWorks] = useState([]);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
+    setIsLoaded(false);
     const { composerId } = router.query;
     getWorksByComposerID(parseInt(composerId))
       .then((data) => {
         setWorks(data);
+        setIsLoaded(true);
         console.log(works);
       })
       .catch((error) => {

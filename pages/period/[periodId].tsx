@@ -5,6 +5,7 @@ import {
   currComposerIdState,
   currPeriodIdState,
   currWorkIdState,
+  isLoadedState,
 } from "@/atoms/states";
 import {
   getComposersByPeriod,
@@ -26,14 +27,17 @@ export default function Period() {
   const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodIdState);
   const [composers1, setComposers1] = useState([]);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
   const router = useRouter();
 
   useEffect(() => {
+    setIsLoaded(false);
     const { periodId } = router.query;
     setCurrPeriod(periodId);
     getComposersByPeriod(periodId)
       .then((data) => {
         setComposers1(data);
+        setIsLoaded(true);
         console.log(composers1);
       })
       .catch((error) => {

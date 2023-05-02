@@ -6,6 +6,7 @@ import {
   currWorkIdState,
   currTrackIdState,
   isPlayingState,
+  isLoadedState,
 } from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
 import { useRouter } from "next/router";
@@ -29,15 +30,18 @@ export default function Album() {
   const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
     if (router.isReady) {
+      setIsLoaded(false);
       const { albumId } = router.query;
       spotifyApi
         .getAlbum(albumId)
         .then(function (data) {
           console.log(data.body);
           setAlbum(data.body);
+          setIsLoaded(true);
           // console.log(album);
         })
         .catch(function (error) {

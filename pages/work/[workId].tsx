@@ -5,6 +5,7 @@ import {
   currAlbumIdState,
   currComposerIdState,
   currWorkIdState,
+  isLoadedState,
 } from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
 import { useRouter } from "next/router";
@@ -25,12 +26,15 @@ export default function Recordings() {
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
+    setIsLoaded(false);
     const { workId } = router.query;
     getRecordingByWorkID(parseInt(workId))
       .then((data) => {
         setRecs(data);
+        setIsLoaded(true);
         console.log(data);
       })
       .catch((error) => {
