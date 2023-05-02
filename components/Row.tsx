@@ -9,7 +9,7 @@ export default function Row({ cover, title, subtitle }) {
           alt={title}
           width={128}
           height={128}
-          className="w-16 h-16"
+          className="w-16 h-16 shadow-md"
         />
       )}
       <div className="flex flex-col">
