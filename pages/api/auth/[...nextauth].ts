@@ -3,7 +3,7 @@ import SpotifyProvider from "next-auth/providers/spotify";
 import refreshAccessToken from "@/lib/spotify";
 
 const scope =
-  "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative";
+  "user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-email user-read-private user-library-read user-library-modify streaming";
 
 export default NextAuth({
   providers: [
