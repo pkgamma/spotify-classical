@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react";
-import useOpenOpus from "@/hooks/useOpenOpus";
-import { useRecoilState } from "recoil";
-import {
-  currAlbumIdState,
-  currComposerIdState,
-  currWorkIdState,
-  isLoadedState,
-} from "@/atoms/states";
-import { getWorksByComposerID, listOptions } from "@/lib/openopus";
-import { useRouter } from "next/router";
-import LeftSidebar from "@/components/LeftSidebar";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { getRecordingByWorkID } from "@/lib/concertmaster";
-import Image from "next/image";
-import Row from "@/components/Row";
-import PageTitle from "@/components/PageTitle";
+import { currAlbumIdState, isLoadedState } from "@/atoms/states";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/PageTitle";
+import Row from "@/components/Row";
+import { getRecordingByWorkID } from "@/lib/concertmaster";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Recordings() {
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
-  const [works, setWorks] = useState([]);
-  const [recs, setRecs] = useState([]);
-  const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
-  const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
   const router = useRouter();
+  const [recs, setRecs] = useState([]);
+  const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {

@@ -14,12 +14,12 @@ import { useToast } from "@/components/ui/use-toast";
 
 export default function Album() {
   const router = useRouter();
+  const { toast } = useToast();
   const spotifyApi = useSpotify();
   const [album, setAlbum] = useState([]);
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
-  const { toast } = useToast();
 
   useEffect(() => {
     if (router.isReady) {

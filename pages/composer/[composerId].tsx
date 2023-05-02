@@ -13,10 +13,10 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 export default function Works() {
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
-  const [works, setWorks] = useState([]);
-  const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
+  const [works, setWorks] = useState([]);
+  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
+  const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
