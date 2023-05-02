@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
-import useOpenOpus from "@/hooks/useOpenOpus";
-import { useRecoilState } from "recoil";
 import {
   currComposerIdState,
   currWorkIdState,
   isLoadedState,
 } from "@/atoms/states";
-import { getWorksByComposerID, listOptions } from "@/lib/openopus";
-import { useRouter } from "next/router";
-import LeftSidebar from "@/components/LeftSidebar";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Row from "@/components/Row";
-import PageTitle from "@/components/PageTitle";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/PageTitle";
+import Row from "@/components/Row";
+import { getWorksByComposerID } from "@/lib/openopus";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Works() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);

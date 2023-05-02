@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
-import useOpenOpus from "@/hooks/useOpenOpus";
-import { useRecoilState } from "recoil";
 import {
-  currComposerIdState,
-  currWorkIdState,
   currTrackIdState,
-  isPlayingState,
   isLoadedState,
+  isPlayingState,
 } from "@/atoms/states";
-import { getWorksByComposerID, listOptions } from "@/lib/openopus";
-import { useRouter } from "next/router";
-import LeftSidebar from "@/components/LeftSidebar";
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { getRecordingByWorkID } from "@/lib/concertmaster";
-import useSpotify from "@/hooks/useSpotify";
-import Row from "@/components/Row";
-import PageTitle from "@/components/PageTitle";
 import Layout from "@/components/Layout";
+import PageTitle from "@/components/PageTitle";
+import Row from "@/components/Row";
+import useSpotify from "@/hooks/useSpotify";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Album() {
-  const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
-  const [works, setWorks] = useState([]);
-  const [recs, setRecs] = useState([]);
-  const [album, setAlbum] = useState([]);
-  const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
   const spotifyApi = useSpotify();
+  const [album, setAlbum] = useState([]);
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (router.isReady) {
@@ -53,9 +42,24 @@ export default function Album() {
   const playSong = (uri) => {
     setCurrentTrackId(uri);
     setIsPlaying(true);
-    spotifyApi.play({
-      uris: [uri],
-    });
+    spotifyApi
+      .play({
+        uris: [uri],
+      })
+      .catch((error) => {
+        if (error.message.includes("NO_ACTIVE_DEVICE")) {
+          toast({
+            variant: "destructive",
+            title: "Please open Spotify on a device to initiate playback.",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: error.message,
+          });
+        }
+        console.error(error);
+      });
   };
 
   return (
