@@ -38,10 +38,13 @@ export default function Album() {
           if (error.message.includes("No token provided")) {
             toast({
               variant: "destructive",
-              title: "Please log in to Spotify to view this page.",
+              title: "Please log in to Spotify.",
               action: (
-                <ToastAction onClick={() => router.back()} altText="Back">
-                  Back
+                <ToastAction
+                  onClick={() => router.push("/login")}
+                  altText="Login"
+                >
+                  Login
                 </ToastAction>
               ),
             });
