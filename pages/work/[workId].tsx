@@ -25,7 +25,6 @@ export default function Recordings() {
           console.log(data);
         })
         .catch((error) => {
-          console.log("at file TempRecs.tsx");
           console.error(error);
         });
     }

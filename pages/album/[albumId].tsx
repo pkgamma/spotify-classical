@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 export default function Album() {
   const router = useRouter();
@@ -34,6 +35,22 @@ export default function Album() {
           // console.log(album);
         })
         .catch(function (error) {
+          if (error.message.includes("No token provided")) {
+            toast({
+              variant: "destructive",
+              title: "Please log in to Spotify to view this page.",
+              action: (
+                <ToastAction onClick={() => router.back()} altText="Back">
+                  Back
+                </ToastAction>
+              ),
+            });
+          } else {
+            toast({
+              variant: "destructive",
+              title: error.message,
+            });
+          }
           console.error(error);
         });
     }
@@ -50,7 +67,7 @@ export default function Album() {
         if (error.message.includes("NO_ACTIVE_DEVICE")) {
           toast({
             variant: "destructive",
-            title: "Please open Spotify on a device to initiate playback.",
+            title: "Please open Spotify on a device for playback.",
           });
         } else {
           toast({

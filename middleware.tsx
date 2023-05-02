@@ -10,11 +10,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  if (!token && pathname !== "/login") {
-    const url = req.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
-  }
+  // TO HANDLE WHEN USER IS NOT LOGGED IN
+  // ======================================================
+  // if (!token && pathname !== "/login") {
+  //   const url = req.nextUrl.clone();
+  //   url.pathname = "/login";
+  //   return NextResponse.redirect(url);
+  // }
 }
 
 export const config = {
