@@ -11,9 +11,7 @@ export default function HomePage() {
     <div>
       <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
       <main className="pl-56">
-        <div className="flex items-center justify-between top-0 left-0 right-0 pointer-events-none sticky p-6">
-          <ChevronLeft className="h-6 w-6" />
-        </div>
+        <h1 className="text-2xl font-bold">Home</h1>
         {/* <div className="w-full box-border pb-0 mb-12 pl-8 pr-8">
           <header className="flex flex-col items-center mb-12 text-center">
             <h1 className="text-center p-0 box-border m-0 min-w-0 text-2xl font-bold pl-12 pr-12">
@@ -48,11 +46,12 @@ export default function HomePage() {
             </a>
           </div>
         </div> */}
-        <div className="grid grid-cols-4 m-8">
+
+        {/* <div className="grid grid-cols-4 m-8">
           <TempComposers />
           <TempWorks />
           <TempRecs />
-        </div>
+        </div> */}
       </main>
     </div>
   );

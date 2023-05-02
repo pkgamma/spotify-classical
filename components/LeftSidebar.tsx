@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { periodOptions } from "@/lib/openopus";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function LeftSidebar({ className }) {
   const spotifyApi = useSpotify();
@@ -32,17 +33,17 @@ export default function LeftSidebar({ className }) {
     <div className={cn("", className)}>
       <div className="px-4">
         <h2 className="text-md font-bold h-20 flex items-center pl-4 mb-2">
-          Spotify Classical
+          <Link href="/">Spotify Classical</Link>
         </h2>
         <div className="space-y-1">
           {Object.entries(periodOptions).map(([key, value]) => (
             <Button
               key={key}
-              onClick={() => setCurrPeriod(value)}
+              // onClick={() => setCurrPeriod(value)}
               variant="ghost"
               className="w-full justify-start font-normal"
             >
-              {value}
+              <Link href={`/period/${value}`}>{value}</Link>
             </Button>
           ))}
         </div>
