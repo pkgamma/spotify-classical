@@ -13,6 +13,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getRecordingByWorkID } from "@/lib/concertmaster";
+import useSpotify from "@/hooks/useSpotify";
 
 export default function Album() {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerState);
@@ -21,27 +22,34 @@ export default function Album() {
   const [album, setAlbum] = useState([]);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
+  const spotifyApi = useSpotify();
 
   useEffect(() => {
-    const { albumId } = router.query;
-    console.log("albumId", albumId);
-    setAlbum(albumId);
-    // getRecordingByWorkID(parseInt(albumId))
-    //   .then((data) => {
-    //     setRecs(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("at file TempRecs.tsx");
-    //     console.error(error);
-    //   });
+    if (router.isReady) {
+      const { albumId } = router.query;
+      spotifyApi
+        .getAlbum(albumId)
+        .then(function (data) {
+          console.log(data.body);
+          setAlbum(data.body);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    }
   }, [router]);
 
   return (
     <div>
       <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
       <main className="pl-56">
-        <h1 className="text-2xl font-bold">{`Spotify Album "${album}"`}</h1>
+        <h1 className="text-2xl font-bold">{`Spotify Album "${album.name}"`}</h1>
         <Button onClick={() => router.back()}>back</Button>
+        <ul>
+          {album?.tracks?.items.map((item) => (
+            <li key={item.id}>{`${item.track_number}. ${item.name}`}</li>
+          ))}
+        </ul>
       </main>
     </div>
   );
