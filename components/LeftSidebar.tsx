@@ -37,18 +37,18 @@ export default function LeftSidebar({ className }) {
         </h2>
         <div className="space-y-1">
           {Object.entries(periodOptions).map(([key, value]) => (
-            <Button
+            <Link
+              onClick={() => setCurrPeriod(value)}
+              href={`/period/${value}`}
               key={key}
-              variant="ghost"
-              className="w-full justify-start font-normal"
             >
-              <Link
-                onClick={() => setCurrPeriod(value)}
-                href={`/period/${value}`}
+              <Button
+                variant="ghost"
+                className="w-full justify-start font-normal"
               >
                 {value}
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           ))}
         </div>
 
