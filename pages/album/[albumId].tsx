@@ -4,6 +4,8 @@ import { useRecoilState } from "recoil";
 import {
   currComposerState,
   currWorkIdState,
+  currentTrackState,
+  isPlayingState,
   sidebarClickedBtnState,
 } from "@/atoms/states";
 import { getWorksByComposerID, listOptions } from "@/lib/openopus";
@@ -23,6 +25,8 @@ export default function Album() {
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
   const router = useRouter();
   const spotifyApi = useSpotify();
+  const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   useEffect(() => {
     if (router.isReady) {
@@ -39,6 +43,15 @@ export default function Album() {
     }
   }, [router]);
 
+  const playSong = (uri) => {
+    // console.log(uri);
+    setCurrentTrackId(uri);
+    setIsPlaying(true);
+    spotifyApi.play({
+      uris: [uri],
+    });
+  };
+
   return (
     <div>
       <LeftSidebar className="border-r w-56 fixed left-0 top-0 bottom-0 overflow-auto" />
@@ -47,7 +60,9 @@ export default function Album() {
         <Button onClick={() => router.back()}>back</Button>
         <ul>
           {album?.tracks?.items.map((item) => (
-            <li key={item.id}>{`${item.track_number}. ${item.name}`}</li>
+            <li onClick={() => playSong(item.uri)} key={item.id}>
+              {`${item.track_number}. ${item.name}`}
+            </li>
           ))}
         </ul>
       </main>

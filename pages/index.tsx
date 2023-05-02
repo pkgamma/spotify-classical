@@ -1,10 +1,6 @@
 import React from "react";
-import TempComposers from "@/components/TempComposers";
-import TempWorks from "@/components/TempWorks";
-import TempRecs from "@/components/TempRecs";
 import LeftSidebar from "@/components/LeftSidebar";
-import { ChevronDoubleLeftIcon } from "@heroicons/react/outline";
-import { ChevronLeft } from "lucide-react";
+import TempPlayer from "@/components/TempPlayer";
 
 export default function HomePage() {
   return (
@@ -45,12 +41,6 @@ export default function HomePage() {
               </div>
             </a>
           </div>
-        </div> */}
-
-        {/* <div className="grid grid-cols-4 m-8">
-          <TempComposers />
-          <TempWorks />
-          <TempRecs />
         </div> */}
       </main>
     </div>

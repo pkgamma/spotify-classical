@@ -9,6 +9,7 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import { periodOptions } from "@/lib/openopus";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import TempPlayer from "./TempPlayer";
 
 export default function LeftSidebar({ className }) {
   const spotifyApi = useSpotify();
@@ -48,6 +49,7 @@ export default function LeftSidebar({ className }) {
           ))}
         </div>
 
+        <TempPlayer />
         {/* <div className="px-4 py-2">
           <h2 className="mb-2 px-2 text-lg font-semibold ">
             Spotify Playlists
