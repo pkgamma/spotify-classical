@@ -12,12 +12,13 @@ export default function HomePage() {
             Welcome to SymphonyNow, a portal to the timeless world of classical
             music. Enter a world of wonder and enchantment, where the soaring
             melodies and rich harmonies of the greatest composers of all time
-            await you. From the soaring majesty of Beethoven's Ninth Symphony to
-            the breathtaking beauty of Chopin's Nocturnes , SymphonyNow invites
-            you to immerse yourself in the sublime artistry of classical music.
-            So come, let us journey together through the centuries, exploring
-            the depths of human emotion and the limitless potential of the human
-            spirit, as we discover the wonders of classical music together.
+            await you. From the soaring majesty of the Ninth Symphony by
+            Beethoven to the breathtaking beauty of Nocturnes by Chopin,
+            SymphonyNow invites you to immerse yourself in the sublime artistry
+            of classical music. So come, let us journey together through the
+            centuries, exploring the depths of human emotion and the limitless
+            potential of the human spirit, as we discover the wonders of
+            classical music together.
           </h2>
         </div>
       </div>
