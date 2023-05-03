@@ -35,6 +35,11 @@ export const currTrackIdState = atom({
   default: null,
 });
 
+export const currSearchQueryState = atom({
+  key: "currSearchQueryState",
+  default: null,
+});
+
 export const isPlayingState = atom({
   key: "isPlayingState",
   default: false,

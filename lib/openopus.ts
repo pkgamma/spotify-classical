@@ -128,6 +128,13 @@ export async function getWorkDetailsByWorkID(id: number) {
   return await openOpusApi(endpoint);
 }
 
+// =============================================================
+
+export async function getWorkAndComposerBySearch(search: string) {
+  const endpoint = `/omnisearch/${search}/0.json`;
+  return await openOpusApi(endpoint);
+}
+
 // SEARCH RELATED API CALLS NOT YET IMPLEMENTED:
 // see https://github.com/openopus-org/openopus_api/blob/master/USAGE.md
 
@@ -144,11 +151,6 @@ export async function getWorkDetailsByWorkID(id: number) {
 // composer	196,183	Return only works by specific composers
 // composer_not	165,3	Don't return works by certain composers
 // work	16642,16578,16595	Return only works from a list
-
-// Omnisearch
-// =================
-// Search works and composers by name/title
-// GET /omnisearch/beeth/0.json
 
 // Performers
 // =================

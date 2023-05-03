@@ -1,9 +1,10 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import LeftSidebar from "./LeftSidebar";
+import NavbarDesktop from "./NavbarDesktop";
 import { useRecoilState } from "recoil";
 import { isLoadedState } from "@/atoms/states";
-import { Loader2 } from "lucide-react";
+import { ListIcon, Loader2 } from "lucide-react";
+import NavbarMobile from "./NavbarMobile";
 
 type Props = {
   children?: ReactNode;
@@ -18,8 +19,9 @@ export default function Layout({ children, title = "Default Title" }: Props) {
         <Head>
           <title>Loading...</title>
         </Head>
-        <LeftSidebar className="border-r w-60 fixed left-0 top-0 bottom-0 overflow-auto" />
-        <main className="pl-60 mx-auto max-w-6xl">
+        <NavbarDesktop className="md:w-56 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
+        <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
+        <main className="md:pl-56 mx-auto max-w-6xl">
           <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col items-center justify-center">
               <div className="animate-spin">
@@ -38,8 +40,11 @@ export default function Layout({ children, title = "Default Title" }: Props) {
       <Head>
         <title>{title}</title>
       </Head>
-      <LeftSidebar className="border-r w-60 fixed left-0 top-0 bottom-0 overflow-auto" />
-      <main className="pl-60 mx-auto max-w-6xl">{children}</main>
+      <NavbarDesktop className="md:w-56 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
+      <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
+
+      <main className="md:pl-56 mx-auto max-w-6xl">{children}</main>
+
       <footer>{/* add any common footer components here */}</footer>
     </div>
   );
