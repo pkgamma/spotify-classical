@@ -11,16 +11,56 @@ async function openOpusApi(endpoint: string) {
 // =============================================================
 
 export const periodOptions = {
-  Medieval: "Medieval",
-  Renaissance: "Renaissance",
-  Baroque: "Baroque",
-  Classical: "Classical",
-  EarlyRomantic: "Early Romantic",
-  Romantic: "Romantic",
-  LateRomantic: "Late Romantic",
-  TwentiethCentury: "20th Century",
-  PostWar: "Post-War",
-  TwentyFirstCentury: "21st Century",
+  Medieval: {
+    title: "Medieval",
+    subtitle:
+      "A time of wonder and devotion, where the soaring harmonies of sacred music captivated the soul.",
+  },
+  Renaissance: {
+    title: "Renaissance",
+    subtitle:
+      "An era of enlightenment, where beauty and innovation converged in exquisite polyphony and intricate melodies.",
+  },
+  Baroque: {
+    title: "Baroque",
+    subtitle:
+      "A world of grandeur and excess, where music overflowed with dramatic intensity and ornate splendor.",
+  },
+  Classical: {
+    title: "Classical",
+    subtitle:
+      "An age of refined beauty, where composers crafted works of balanced simplicity and graceful elegance.",
+  },
+  EarlyRomantic: {
+    title: "Early Romantic",
+    subtitle:
+      "A time of intense emotion, where music transcended boundaries to express the depths of the human soul.",
+  },
+  Romantic: {
+    title: "Romantic",
+    subtitle:
+      "An era of passion and enchantment, where music swelled with sweeping melodies and transcendent beauty.",
+  },
+  LateRomantic: {
+    title: "Late Romantic",
+    subtitle:
+      "A world of unbridled expression, where composers unleashed the full range of emotion in works of staggering complexity.",
+  },
+  TwentiethCentury: {
+    title: "20th Century",
+    subtitle:
+      "An age of bold experimentation, where composers explored new forms to capture the spirit of a rapidly changing world.",
+  },
+  PostWar: {
+    title: "Post-War",
+    subtitle:
+      "A time of rebirth and renewal, where music served as a beacon of hope in the aftermath of global conflict.",
+  },
+  TwentyFirstCentury: {
+    title: "21st Century",
+    subtitle:
+      "A period of boundless creativity and innovation, where classical music continues to evolve with its limitless potential.",
+  },
 };
 
 export const genreOptions = {
@@ -50,7 +90,7 @@ export async function getComposersByFirstLetter(letter: string) {
 }
 
 export async function getComposersByPeriod(period: keyof typeof periodOptions) {
-  const endpoint = `/composer/list/epoch/${period}.json`;
+  const endpoint = `/composer/list/epoch/${periodOptions[period].title}.json`;
   return await openOpusApi(endpoint);
 }
 

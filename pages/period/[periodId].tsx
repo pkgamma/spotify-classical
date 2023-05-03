@@ -6,7 +6,7 @@ import {
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import Row from "@/components/Row";
-import { getComposersByPeriod } from "@/lib/openopus";
+import { getComposersByPeriod, periodOptions } from "@/lib/openopus";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -35,9 +35,11 @@ export default function Period() {
     }
   }, [router]);
 
+  const peridTitle = periodOptions[currPeriod].title;
+
   return (
-    <Layout title={`${currPeriod} Period`}>
-      <PageTitle title={`Composers of the ${currPeriod} Period`} />
+    <Layout title={`${peridTitle} Period`}>
+      <PageTitle title={`Composers of the ${peridTitle} Period`} />
       <ul>
         {composers?.map((composer) => (
           <Link

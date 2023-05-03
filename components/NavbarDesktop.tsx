@@ -57,7 +57,7 @@ export default function NavbarDesktop({ className }) {
   return (
     <div className={cn("", className)}>
       <div className="px-4">
-        <h2 className="text-md font-bold h-20 flex items-center pl-4 mb-2">
+        <h2 className="text-md font-semibold font-serif h-20 flex items-center pl-4 mb-2">
           <Link href="/">SymphonyNow</Link>
         </h2>
         {/* ==== nav bar top ==== */}
