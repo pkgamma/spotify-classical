@@ -35,11 +35,9 @@ export default function Period() {
     }
   }, [router]);
 
-  const peridTitle = periodOptions[currPeriod].title;
-
   return (
-    <Layout title={`${peridTitle} Period`}>
-      <PageTitle title={`Composers of the ${peridTitle} Period`} />
+    <Layout title={`${composers[0]?.epoch} Period`}>
+      <PageTitle title={`Composers of the ${composers[0]?.epoch} Period`} />
       <ul>
         {composers?.map((composer) => (
           <Link
