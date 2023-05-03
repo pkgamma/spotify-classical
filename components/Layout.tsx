@@ -18,6 +18,10 @@ export default function Layout({ children, title = "Default Title" }: Props) {
       <div>
         <Head>
           <title>Loading...</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+          ></meta>
         </Head>
         <NavbarDesktop className="md:w-56 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
         <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
@@ -39,11 +43,17 @@ export default function Layout({ children, title = "Default Title" }: Props) {
     <div>
       <Head>
         <title>{title}</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+        ></meta>
       </Head>
       <NavbarDesktop className="md:w-56 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
       <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
 
-      <main className="md:pl-56 mx-auto max-w-6xl">{children}</main>
+      <main className="md:pl-56 md:mx-auto md:max-w-6xl mx-4 pb-20">
+        <div className="md:mx-12">{children}</div>
+      </main>
 
       <footer>{/* add any common footer components here */}</footer>
     </div>

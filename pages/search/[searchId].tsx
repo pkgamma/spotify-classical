@@ -11,11 +11,7 @@ import Row from "@/components/Row";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import {
-  getComposersByPeriod,
-  getWorkAndComposerBySearch,
-  periodOptions,
-} from "@/lib/openopus";
+import { getWorkAndComposerBySearch } from "@/lib/openopus";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -62,7 +58,7 @@ export default function Search() {
     <Layout title="Search">
       <PageTitle title="Search" />
 
-      <div className="flex items-center mb-12 text-center mx-12">
+      <div className="flex items-center mb-12 text-center">
         <Input
           type="text"
           value={query}
