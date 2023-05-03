@@ -1,3 +1,4 @@
+import { periodOptions } from "@/lib/openopus";
 import { atom } from "recoil";
 
 export const isLoadedState = atom({
@@ -7,7 +8,7 @@ export const isLoadedState = atom({
 
 export const currPeriodIdState = atom({
   key: "currPeriodIdState",
-  default: null,
+  default: periodOptions.Romantic,
 });
 
 export const currComposerIdState = atom({
