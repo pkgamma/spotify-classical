@@ -75,6 +75,9 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      boxShadow: {
+        lg: "rgba(0, 0, 0, 0.15) 0px 1.1px 1.5px, rgba(0, 0, 0, 0.1) 0px 2.8px 3.9px, rgba(0, 0, 0, 0.08) 0px 5.8px 7.9px, rgba(0, 0, 0, 0.06) 0px 12.0455px 16.4px, rgba(0, 0, 0, 0.04) 0px 33px 45px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
