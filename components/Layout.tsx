@@ -26,7 +26,7 @@ export default function Layout({ children, title = "Default Title" }: Props) {
       <NavbarDesktop className="md:w-56 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
       <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
 
-      <div className="md:pl-56">
+      <main className="md:pl-56">
         <div className="flex flex-col ">
           <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
             {isLoaded ? (
@@ -42,7 +42,7 @@ export default function Layout({ children, title = "Default Title" }: Props) {
             )}
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

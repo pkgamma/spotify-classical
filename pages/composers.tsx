@@ -68,19 +68,10 @@ export default function Composers() {
                   <p className="text-gray-400 text-sm mt-0.5">
                     {composer.complete_name}
                   </p>
-                  <p className="text-gray-300 text-xs mt-2">
-                    {composer.birth?.slice(0, 4)} -{" "}
-                    {composer.death?.slice(0, 4)}
-                  </p>
+                  <p className="text-gray-300 text-xs mt-2">{composer.epoch}</p>
                 </div>
               </div>
             </div>
-
-            {/* <Row
-              cover={composer.portrait}
-              title=
-              subtitle={composer.complete_name}
-            /> */}
           </Link>
         ))}
       </div>
