@@ -28,7 +28,7 @@ export default function Layout({ children, title = "Default Title" }: Props) {
 
       <div className="md:pl-56">
         <div className="flex flex-col ">
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-2 pb-20 ">
+          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
             {isLoaded ? (
               children
             ) : (
