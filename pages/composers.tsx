@@ -52,7 +52,7 @@ export default function Composers() {
             onClick={() => setCurrComposer(composer.id)}
             key={composer.id}
           >
-            <div className="border rounded-lg hover:bg-gray-50 transition ease-in-out ">
+            <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
               <div className="cursor-pointer select-none flex items-center">
                 <div className="flex items-center justify-center h-28 w-28 bg-gray-100">
                   <Image

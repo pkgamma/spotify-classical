@@ -38,7 +38,7 @@ export default function Periods() {
             onClick={() => setCurrPeriod(key)}
             key={key}
           >
-            <div className="border rounded-lg hover:bg-gray-50 transition ease-in-out ">
+            <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
               <div className="cursor-pointer select-none flex items-center h-32">
                 {/* <div className="flex items-center justify-center h-36 w-28 bg-gray-100">
                   <Image
