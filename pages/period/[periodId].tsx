@@ -7,6 +7,7 @@ import CardComposer from "@/components/CardComposer";
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import Row from "@/components/Row";
+import SectionTitle from "@/components/SectionTitle";
 import {
   getComposersByPeriod,
   getComposersEssential,
@@ -72,14 +73,7 @@ export default function Period() {
 
       {popularArray.length > 0 && (
         <div>
-          <div className="flex items-end justify-between mb-6">
-            <div className="font-medium">Popular Composers</div>
-            <p className="text-sm text-gray-500">
-              More
-              <ArrowRightIcon className="inline-block w-4 h-4 ml-0.5 mb-0.5" />
-            </p>
-          </div>
-
+          <SectionTitle text="Popular" />
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             {popularArray?.map((composer) => (
               <CardComposer key={composer.id} composer={composer} />
@@ -88,14 +82,7 @@ export default function Period() {
         </div>
       )}
 
-      <div className="flex items-end justify-between mb-6">
-        <div className="font-medium">All Composers</div>
-        <p className="text-sm text-gray-500">
-          More
-          <ArrowRightIcon className="inline-block w-4 h-4 ml-0.5 mb-0.5" />
-        </p>
-      </div>
-
+      <SectionTitle text="All" />
       <div className="grid md:grid-cols-3 gap-4">
         {nonPopularArray?.map((composer) => (
           <CardComposer key={composer.id} composer={composer} />

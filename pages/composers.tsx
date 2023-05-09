@@ -6,6 +6,7 @@ import {
 import CardComposer from "@/components/CardComposer";
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { getComposersPopular } from "@/lib/openopus";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
@@ -37,15 +38,7 @@ export default function Composers() {
   return (
     <Layout title="Popular Composers">
       <PageTitle title="Popular Composers" />
-
-      <div className="flex items-end justify-between mb-6">
-        <div className="font-medium">Popular Composers</div>
-        <p className="text-sm text-gray-500">
-          More
-          <ArrowRightIcon className="inline-block w-4 h-4 ml-0.5 mb-0.5" />
-        </p>
-      </div>
-
+      <SectionTitle text="Popular" />
       <div className="grid md:grid-cols-3 gap-4">
         {composers?.map((composer) => (
           <CardComposer key={composer.id} composer={composer} />

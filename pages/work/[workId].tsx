@@ -1,8 +1,11 @@
 import { currAlbumIdState, isLoadedState } from "@/atoms/states";
+import CardAlbum from "@/components/CardAlbum";
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import Row from "@/components/Row";
+import SectionTitle from "@/components/SectionTitle";
 import { getRecordingByWorkID } from "@/lib/concertmaster";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -30,29 +33,48 @@ export default function Recordings() {
     }
   }, [router]);
 
+  const verifiedRecordings = [];
+  const allOtherRecordings = [];
+
+  recs?.recordings?.map((recording) => {
+    // added this check to make sure that the recording has an album name
+    // for some reason, open opus sometimes give recordings without album names
+    if (recording.album_name != null) {
+      if (recording.verified === "true") {
+        verifiedRecordings.push(recording);
+      } else {
+        allOtherRecordings.push(recording);
+      }
+    }
+  });
+
   return (
     <Layout title={`${recs?.work?.title}`}>
       <PageTitle title={`Recordings of ${recs?.work?.title}`} />
-      <ul>
-        {recs?.work?.title &&
-          (recs?.recordings?.length > 0 ? (
-            recs?.recordings?.map((rec) => (
-              <Link
-                href={`/album/${rec.spotify_albumid}`}
-                onClick={() => setCurrAlbum(rec.spotify_albumid)}
-                key={rec.spotify_albumid}
-              >
-                <Row
-                  cover={rec.cover}
-                  title={rec.album_name}
-                  subtitle={rec.year}
-                />
-              </Link>
-            ))
-          ) : (
-            <Row cover={null} title={"No recordings found"} subtitle={null} />
-          ))}
-      </ul>
+
+      {recs?.recordings?.length === 0 && <h1>Nothing found</h1>}
+
+      {verifiedRecordings?.length > 0 && (
+        <div>
+          <SectionTitle text="Verified Recordings" />
+          <div className="grid md:grid-cols-2 gap-4 mb-12">
+            {verifiedRecordings.map((album) => (
+              <CardAlbum key={album.spotify_albumid} album={album} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {allOtherRecordings?.length > 0 && (
+        <div>
+          <SectionTitle text="All Recordings" />
+          <div className="grid md:grid-cols-2 gap-4">
+            {allOtherRecordings.map((album) => (
+              <CardAlbum key={album.spotify_albumid} album={album} />
+            ))}
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

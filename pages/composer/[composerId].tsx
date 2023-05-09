@@ -6,11 +6,17 @@ import {
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import Row from "@/components/Row";
-import { getWorksByComposerID } from "@/lib/openopus";
+import {
+  getWorksByComposerID,
+  getWorksByComposerIDPopular,
+} from "@/lib/openopus";
+import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import CardWork from "@/components/CardWork";
+import SectionTitle from "@/components/SectionTitle";
 
 export default function Works() {
   const router = useRouter();
@@ -23,7 +29,7 @@ export default function Works() {
     if (router.isReady) {
       setIsLoaded(false);
       const { composerId } = router.query;
-      getWorksByComposerID(parseInt(composerId))
+      getWorksByComposerIDPopular(parseInt(composerId))
         .then((data) => {
           setWorks(data);
           setIsLoaded(true);
@@ -38,18 +44,13 @@ export default function Works() {
   return (
     <Layout title={`${works?.composer?.name}`}>
       <PageTitle title={`Works of Composer ${works?.composer?.name}`} />
-      <ul>
+
+      <SectionTitle text="Popular" />
+
+      <div className="grid gap-4">
         {works?.works &&
-          works?.works.map((work) => (
-            <Link
-              href={`/work/${work.id}`}
-              onClick={() => setCurrWorkId(work.id)}
-              key={work.id}
-            >
-              <Row cover={null} title={work.title} subtitle={"Subtitle"} />
-            </Link>
-          ))}
-      </ul>
+          works?.works.map((work) => <CardWork key={work.id} work={work} />)}
+      </div>
     </Layout>
   );
 }

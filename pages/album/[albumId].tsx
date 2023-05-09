@@ -14,6 +14,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import SectionTitle from "@/components/SectionTitle";
 
 export default function Album() {
   const router = useRouter();
@@ -92,10 +93,13 @@ export default function Album() {
       <PageTitle title={`"${album.name}" on Spotify`} />
       <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
 
-      <Link href={album.external_urls.spotify} target="_blank">
-        <Button>Open in Spotify</Button>
-      </Link>
+      {album?.external_urls && (
+        <Link href={album.external_urls.spotify} target="_blank">
+          <Button>Open in Spotify</Button>
+        </Link>
+      )}
 
+      <SectionTitle text="Songs" />
       <ul>
         {album?.tracks?.items.map((item) => (
           <div onClick={() => playSpotify(item.uri)} key={item.id}>
