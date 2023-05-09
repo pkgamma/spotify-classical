@@ -1,17 +1,13 @@
-import {
-  currComposerIdState,
-  currWorkIdState,
-  isLoadedState,
-} from "@/atoms/states";
+import { isLoadedState } from "@/atoms/states";
 import CardWork from "@/components/CardWork";
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import SectionTitle from "@/components/SectionTitle";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { getWorksByComposerID } from "@/lib/openopus";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Works() {
   const router = useRouter();
@@ -34,8 +30,6 @@ export default function Works() {
         });
     }
   }, [router]);
-
-  console.log(works);
 
   const worksPopular = [];
   const worksChamber = [];

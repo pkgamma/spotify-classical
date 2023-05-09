@@ -3,24 +3,27 @@ import {
   isLoadedState,
   isPlayingState,
 } from "@/atoms/states";
+import CardSong from "@/components/CardSong";
 import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
-import Row from "@/components/Row";
+import SectionTitle from "@/components/SectionTitle";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/components/ui/use-toast";
 import useSpotify from "@/hooks/useSpotify";
+import { SiReacthookform, SiSpotify } from "@icons-pack/react-simple-icons";
+import { ToastAction } from "@radix-ui/react-toast";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@radix-ui/react-toast";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import SectionTitle from "@/components/SectionTitle";
 
 export default function Album() {
   const router = useRouter();
   const { toast } = useToast();
   const spotifyApi = useSpotify();
   const [album, setAlbum] = useState([]);
+  const [albumTracks, setAlbumTracks] = useState([]);
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
@@ -33,8 +36,8 @@ export default function Album() {
         .getAlbum(albumId)
         .then(function (data) {
           setAlbum(data.body);
+          setAlbumTracks(data.body.tracks.items);
           setIsLoaded(true);
-          // console.log(album);
         })
         .catch(function (error) {
           if (error.message.includes("No token provided")) {
@@ -84,28 +87,37 @@ export default function Album() {
       console.error(error);
     });
 
-    spotifyApi.setShuffle(false);
+    spotifyApi.setShuffle(false).catch((error) => {
+      console.error(error);
+    });
   };
 
   return (
     <Layout title={`${album.name}`}>
       <PageTitle title={`"${album.name}" on Spotify`} />
-      <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
 
-      {album?.external_urls && (
-        <Link href={album.external_urls.spotify} target="_blank">
-          <Button>Open in Spotify</Button>
-        </Link>
-      )}
+      <div className=" flex justify-center space-x-6 pb-12">
+        <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
+        {album.external_urls && (
+          <Link href={album.external_urls.spotify} target="_blank">
+            <Button className="bg-[#1DB954]">
+              <SiSpotify className="h-4 w-4 mr-2" />
+              Open in Spotify
+            </Button>
+          </Link>
+        )}
+      </div>
 
-      <SectionTitle text="Songs" />
-      <ul>
-        {album?.tracks?.items.map((item) => (
-          <div onClick={() => playSpotify(item.uri)} key={item.id}>
-            <Row cover={null} title={item.name} subtitle={"Subtitle"} />
-          </div>
-        ))}
-      </ul>
+      <SectionTitle text="Tracks" />
+      <ScrollArea className="h-96 w-full rounded-md border p-4">
+        <div className="grid gap-2">
+          {albumTracks.map((track) => (
+            <div onClick={() => playSpotify(track.uri)} key={track.id}>
+              <CardSong track={track} />
+            </div>
+          ))}
+        </div>
+      </ScrollArea>
     </Layout>
   );
 }

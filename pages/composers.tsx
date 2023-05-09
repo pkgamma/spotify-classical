@@ -26,7 +26,6 @@ export default function Composers() {
     setIsLoaded(false);
     getComposersPopular()
       .then((data) => {
-        console.log(data);
         setComposers(data.composers);
         setIsLoaded(true);
       })

@@ -1,4 +1,5 @@
 import { currWorkIdState } from "@/atoms/states";
+import { VerifiedIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
@@ -12,9 +13,11 @@ export default function CardWork(props) {
     <Link href={`/work/${work.id}`} onClick={() => setCurrWorkId(work.id)}>
       <div className=" md:hover:bg-gray-50 transition ease-in-out ">
         <div className="cursor-pointer select-none flex items-center ">
-          <div className="">
+          <div className="flex items-center space-x-2">
             <h2 className="">{work.title}</h2>
-            {/* <p className="text-sm text-gray-400 mt-1">{work.genre}</p> */}
+            {work.recommended == "1" && (
+              <VerifiedIcon className="w-4 h-4 text-gray-300" />
+            )}
           </div>
         </div>
       </div>

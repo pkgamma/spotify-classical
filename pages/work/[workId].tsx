@@ -14,6 +14,7 @@ import { useRecoilState } from "recoil";
 export default function Recordings() {
   const router = useRouter();
   const [recs, setRecs] = useState([]);
+  const [recTitle, setRecTitle] = useState([]);
   const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
@@ -23,7 +24,8 @@ export default function Recordings() {
       const { workId } = router.query;
       getRecordingByWorkID(parseInt(workId))
         .then((data) => {
-          setRecs(data);
+          setRecs(data.recordings);
+          setRecTitle(data.work.title);
           setIsLoaded(true);
           console.log(data);
         })
@@ -36,7 +38,9 @@ export default function Recordings() {
   const verifiedRecordings = [];
   const allOtherRecordings = [];
 
-  recs?.recordings?.map((recording) => {
+  console.log(recs);
+
+  recs?.map((recording) => {
     // added this check to make sure that the recording has an album name
     // for some reason, open opus sometimes give recordings without album names
     if (recording.album_name != null) {
@@ -49,10 +53,14 @@ export default function Recordings() {
   });
 
   return (
-    <Layout title={`${recs?.work?.title}`}>
-      <PageTitle title={`Recordings of ${recs?.work?.title}`} />
+    <Layout title={`${recTitle}`}>
+      <PageTitle title={`Recordings of ${recTitle}`} />
 
-      {recs?.recordings?.length === 0 && <h1>Nothing found</h1>}
+      {!recs && (
+        <div className="flex flex-col items-center justify-center h-96">
+          <h1 className="text-lg ">Nothing Found</h1>
+        </div>
+      )}
 
       {verifiedRecordings?.length > 0 && (
         <div>

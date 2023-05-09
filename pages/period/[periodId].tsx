@@ -35,7 +35,6 @@ export default function Period() {
       setCurrPeriod(periodId);
       getComposersByPeriod(periodId)
         .then((data) => {
-          // console.log(data);
           setComposers(data.composers);
           setIsLoaded(true);
         })
@@ -43,7 +42,6 @@ export default function Period() {
           console.error(error);
         });
       getComposersPopular().then((data) => {
-        console.log(data);
         setPopularComposers(data.composers);
       });
     }
