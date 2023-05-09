@@ -7,7 +7,7 @@ export default function CardAlbum(props) {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
   const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
   const { album } = props;
-  console.log(album);
+
   return (
     <Link
       href={`/album/${album.spotify_albumid}`}

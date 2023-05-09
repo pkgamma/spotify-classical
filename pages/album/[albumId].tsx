@@ -32,7 +32,6 @@ export default function Album() {
       spotifyApi
         .getAlbum(albumId)
         .then(function (data) {
-          console.log(data.body);
           setAlbum(data.body);
           setIsLoaded(true);
           // console.log(album);

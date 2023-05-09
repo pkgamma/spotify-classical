@@ -10,11 +10,11 @@ export default function CardWork(props) {
 
   return (
     <Link href={`/work/${work.id}`} onClick={() => setCurrWorkId(work.id)}>
-      <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
-        <div className="cursor-pointer select-none flex items-center h-24">
-          <div className="md:ml-8 mx-6 max-w-md">
+      <div className=" md:hover:bg-gray-50 transition ease-in-out ">
+        <div className="cursor-pointer select-none flex items-center ">
+          <div className="">
             <h2 className="">{work.title}</h2>
-            <p className="text-sm text-gray-400 mt-2">{work.genre}</p>
+            {/* <p className="text-sm text-gray-400 mt-1">{work.genre}</p> */}
           </div>
         </div>
       </div>
