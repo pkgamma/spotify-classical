@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
+import CardPeriod from "@/components/CardPeriod";
 
 export default function Periods() {
   const router = useRouter();
@@ -33,29 +34,7 @@ export default function Periods() {
 
       <div className="grid md:grid-cols-2 gap-4">
         {Object.entries(periodOptions).map(([key, value]) => (
-          <Link
-            href={`/period/${key}`}
-            onClick={() => setCurrPeriod(key)}
-            key={key}
-          >
-            <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
-              <div className="cursor-pointer select-none flex items-center h-32">
-                {/* <div className="flex items-center justify-center h-36 w-28 bg-gray-100">
-                  <Image
-                  className="flex items-end justify-center w-3/5 h-auto shadow-lg rounded-sm"
-                  // src={composer.portrait}
-                  alt={composer.name}
-                  width={128}
-                  height={128}
-                />
-                </div> */}
-                <div className="md:ml-12 mx-6 max-w-md">
-                  <h2 className="">{value.title}</h2>
-                  <p className="text-sm text-gray-400 mt-2">{value.subtitle}</p>
-                </div>
-              </div>
-            </div>
-          </Link>
+          <CardPeriod key={key} periodKey={key} periodVal={value} />
         ))}
       </div>
     </Layout>

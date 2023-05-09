@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Album() {
   const router = useRouter();
@@ -59,35 +61,44 @@ export default function Album() {
     }
   }, [router]);
 
-  const playSong = (uri) => {
+  const playSpotify = (uri) => {
     setCurrentTrackId(uri);
     setIsPlaying(true);
-    spotifyApi
-      .play({
-        uris: [uri],
-      })
-      .catch((error) => {
-        if (error.message.includes("NO_ACTIVE_DEVICE")) {
-          toast({
-            variant: "destructive",
-            title: "Please open Spotify on a device for playback.",
-          });
-        } else {
-          toast({
-            variant: "destructive",
-            title: error.message,
-          });
-        }
-        console.error(error);
-      });
+
+    const param = uri.includes("track")
+      ? { uris: [uri] }
+      : { context_uri: uri };
+
+    spotifyApi.play(param).catch((error) => {
+      if (error.message.includes("NO_ACTIVE_DEVICE")) {
+        toast({
+          variant: "destructive",
+          title: "Please open Spotify on a device for playback.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: error.message,
+        });
+      }
+      console.error(error);
+    });
+
+    spotifyApi.setShuffle(false);
   };
 
   return (
     <Layout title={`${album.name}`}>
       <PageTitle title={`"${album.name}" on Spotify`} />
+      <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
+
+      <Link href={album.external_urls.spotify} target="_blank">
+        <Button>Open in Spotify</Button>
+      </Link>
+
       <ul>
         {album?.tracks?.items.map((item) => (
-          <div onClick={() => playSong(item.uri)} key={item.id}>
+          <div onClick={() => playSpotify(item.uri)} key={item.id}>
             <Row cover={null} title={item.name} subtitle={"Subtitle"} />
           </div>
         ))}
