@@ -24,7 +24,7 @@ export default function CardAlbum(props) {
               height={128}
             />
           </div>
-          <div className="px-6 max-w-md">
+          <div className="px-6 max-w-sm">
             <h2 className="">{album.album_name}</h2>
             <p className="text-gray-400 text-sm mt-0.5">{album.year}</p>
           </div>

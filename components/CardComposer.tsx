@@ -23,7 +23,7 @@ export default function CardComposer(props) {
               height={128}
             />
           </div>
-          <div className="px-6 max-w-md">
+          <div className="px-6 max-w-sm">
             <h2 className="">{composer.name}</h2>
             <p className="text-gray-400 text-sm mt-0.5">
               {composer.complete_name}
