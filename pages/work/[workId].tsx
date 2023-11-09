@@ -13,11 +13,14 @@ import { useRecoilState } from "recoil";
 
 export default function Recordings({ recs, recTitle }) {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   const verifiedRecordings = [];
   const allOtherRecordings = [];
 
-  console.log(recs);
+  useEffect(() => {
+    setIsLoaded(true);
+  }, [recs, setIsLoaded]);
 
   recs?.map((recording) => {
     // added this check to make sure that the recording has an album name
@@ -70,9 +73,10 @@ export async function getServerSideProps(context) {
   const { workId } = context.query;
   const recs = await getRecordingByWorkID(parseInt(workId));
   const recTitle = recs.work.title;
+  const recordings = recs.recordings || null;
   return {
     props: {
-      recs: recs.recordings,
+      recs: recordings,
       recTitle,
     },
   };
