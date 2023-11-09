@@ -17,41 +17,25 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default function Search() {
+export default function Search({ query, results, success }) {
   const router = useRouter();
-  const [composers, setComposers] = useState([]);
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
-  const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodIdState);
   const [currWorkId, setCurrWorkId] = useRecoilState(currWorkIdState);
-  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
-  const [query, setQuery] = useRecoilState(currSearchQueryState);
-  const [results, setResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useRecoilState(currSearchQueryState);
   const { toast } = useToast();
 
   useEffect(() => {
-    if (router.isReady) {
-      setIsLoaded(false);
-      const { searchId } = router.query;
-      getWorkAndComposerBySearch(searchId)
-        .then((data) => {
-          setIsLoaded(true);
-          if (data.status.success === "false") {
-            toast({
-              variant: "destructive",
-              title: data.status.error,
-            });
-          } else {
-            setResults(data.results);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    console.log(success);
+    if (!success) {
+      toast({
+        title: "Nothing found!",
+        variant: "destructive",
+      });
     }
   }, [router]);
 
   const handleSearch = async () => {
-    router.push(`/search/${query}`);
+    router.push(`/search/${searchQuery}`);
   };
 
   return (
@@ -61,8 +45,8 @@ export default function Search() {
       <div className="flex items-center mb-12 text-center">
         <Input
           type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSearch();
@@ -107,4 +91,18 @@ export default function Search() {
       </ul>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { searchId } = context.query;
+  const data = await getWorkAndComposerBySearch(searchId);
+  console.log(data);
+  const results = data.results || [];
+  return {
+    props: {
+      query: searchId,
+      results,
+      success: JSON.parse(data.status.success),
+    },
+  };
 }

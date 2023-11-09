@@ -20,12 +20,12 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: "/concertmasterApiProxyPath/:path*",
-        destination: "https://api.concertmaster.app/:path*",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/concertmasterApiProxyPath/:path*",
+  //       destination: "https://api.concertmaster.app/:path*",
+  //     },
+  //   ];
+  // },
 };

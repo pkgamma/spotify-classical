@@ -1,5 +1,5 @@
 async function concertmasterApi(endpoint: string) {
-  const response = await fetch(`/concertmasterApiProxyPath${endpoint}`);
+  const response = await fetch(`https://api.concertmaster.app/${endpoint}`);
   const data = await response.json();
   return data;
 }

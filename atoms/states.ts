@@ -13,32 +13,32 @@ export const currPeriodIdState = atom({
 
 export const currComposerIdState = atom({
   key: "currComposerIdState",
-  default: null,
+  default: "",
 });
 
 export const currWorkIdState = atom({
   key: "currWorkIdState",
-  default: null,
+  default: "",
 });
 
 export const currRecordingIdState = atom({
   key: "currRecordingIdState",
-  default: null,
+  default: "",
 });
 
 export const currAlbumIdState = atom({
   key: "currAlbumIdState",
-  default: null,
+  default: "",
 });
 
 export const currTrackIdState = atom({
   key: "currTrackIdState",
-  default: null,
+  default: "",
 });
 
 export const currSearchQueryState = atom({
   key: "currSearchQueryState",
-  default: null,
+  default: "",
 });
 
 export const isPlayingState = atom({

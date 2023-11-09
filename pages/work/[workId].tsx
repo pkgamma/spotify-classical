@@ -11,29 +11,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default function Recordings() {
+export default function Recordings({ recs, recTitle }) {
   const router = useRouter();
-  const [recs, setRecs] = useState([]);
-  const [recTitle, setRecTitle] = useState([]);
-  const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
-  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
-
-  useEffect(() => {
-    if (router.isReady) {
-      setIsLoaded(false);
-      const { workId } = router.query;
-      getRecordingByWorkID(parseInt(workId))
-        .then((data) => {
-          setRecs(data.recordings);
-          setRecTitle(data.work.title);
-          setIsLoaded(true);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [router]);
 
   const verifiedRecordings = [];
   const allOtherRecordings = [];
@@ -85,4 +64,16 @@ export default function Recordings() {
       )}
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { workId } = context.query;
+  const recs = await getRecordingByWorkID(parseInt(workId));
+  const recTitle = recs.work.title;
+  return {
+    props: {
+      recs: recs.recordings,
+      recTitle,
+    },
+  };
 }
