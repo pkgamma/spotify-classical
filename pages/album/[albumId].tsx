@@ -44,7 +44,6 @@ export default function Album() {
             toast({
               variant: "destructive",
               title: "Please log in to Spotify.",
-              action: router.back(),
             });
           } else {
             toast({

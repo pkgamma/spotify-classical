@@ -1,18 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
-import { currAlbumIdState, currComposerIdState } from "@/atoms/states";
+import {
+  currAlbumIdState,
+  currComposerIdState,
+  isLoadedState,
+} from "@/atoms/states";
 import { useRecoilState } from "recoil";
+import { useSession } from "next-auth/react";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/router";
 
 export default function CardAlbum(props) {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
   const [currAlbum, setCurrAlbum] = useRecoilState(currAlbumIdState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
   const { album } = props;
+  const { data: session, status } = useSession();
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (session) {
+      setCurrAlbum(album.spotify_albumid), setIsLoaded(false);
+      router.push(`/album/${album.spotify_albumid}`);
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Please log in to Spotify.",
+      });
+    }
+  };
 
   return (
-    <Link
-      href={`/album/${album.spotify_albumid}`}
-      onClick={() => setCurrAlbum(album.spotify_albumid)}
-    >
+    <div onClick={handleClick}>
       <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
         <div className="cursor-pointer select-none flex items-center">
           <div className="flex items-center justify-center h-28 w-28 bg-gray-100 shrink-0">
@@ -30,6 +50,6 @@ export default function CardAlbum(props) {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
