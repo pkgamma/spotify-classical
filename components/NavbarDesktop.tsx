@@ -20,6 +20,15 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import LoginButtons from "@/components/LoginButtons";
 
 export const Option = ({ link, title, children }) => {
   return (
@@ -90,23 +99,37 @@ export default function NavbarDesktop({ className }) {
         </div>
         {/* ==== nav bar btm ==== */}
         <div className="fixed bottom-0 left-0 px-4 pb-4">
-          <Button variant="ghost" className="w-full justify-start">
-            <div className="flex items-center justify-start -ml-2">
-              <Avatar className="w-8 h-8 block relative">
-                <AvatarImage src={session?.user.image} />
-                <AvatarFallback>G</AvatarFallback>
-              </Avatar>
-              <p className="mx-3">{session ? session?.user.name : "Guest"}</p>
-            </div>
-            {session ? (
-              <LogOutIcon onClick={() => signOut()} className="w-4 h-4" />
-            ) : (
-              <LogInIcon
-                onClick={() => router.push("/login")}
-                className="w-4 h-4"
-              />
-            )}
-          </Button>
+          {session ? (
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              onClick={() => signOut()}
+            >
+              <div className="flex items-center justify-start -ml-2">
+                <Avatar className="w-8 h-8 block relative">
+                  <AvatarImage src={session.user.image} />
+                </Avatar>
+                <p className="mx-3">{session ? session.user.name : "Guest"}</p>
+              </div>
+              <LogOutIcon className="w-4 h-4" />
+            </Button>
+          ) : (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Login</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Login</DialogTitle>
+                  <DialogDescription>
+                    Use your Spotify account to login, this enables the ability
+                    to see recordings of a piece of work.
+                  </DialogDescription>
+                </DialogHeader>
+                <LoginButtons></LoginButtons>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
         {/* ======== */}
       </div>

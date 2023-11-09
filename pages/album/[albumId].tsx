@@ -44,14 +44,7 @@ export default function Album() {
             toast({
               variant: "destructive",
               title: "Please log in to Spotify.",
-              action: (
-                <ToastAction
-                  onClick={() => router.push("/login")}
-                  altText="Login"
-                >
-                  Login
-                </ToastAction>
-              ),
+              action: router.back(),
             });
           } else {
             toast({
