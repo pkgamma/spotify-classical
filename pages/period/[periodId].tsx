@@ -51,13 +51,13 @@ export default function Period({ periodId, composers, popularComposers }) {
   return (
     <Layout title={`${composers[0]?.epoch} Period`}>
       <div className="flex flex-col">
-        <div className="h-96 w-full bg-slate-100 border-b">
+        {/* <div className="h-96 w-full bg-slate-100 border-b">
           <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
             <h1 className="text-4xl font-bold text-slate-900 ">
               Composer Philip
             </h1>
           </div>
-        </div>
+        </div> */}
         <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
           {/* actual inner content starts */}
 

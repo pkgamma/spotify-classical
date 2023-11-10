@@ -9,13 +9,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default function Works({ works, composerName }) {
+export default function Works({ data, works, composer }) {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
     setIsLoaded(true);
-  }, [works, composerName]);
+    console.log(data);
+  }, [works, composer]);
 
   const worksPopular = [];
   const worksChamber = [];
@@ -46,20 +47,30 @@ export default function Works({ works, composerName }) {
   });
 
   return (
-    <Layout title={`${composerName}`}>
+    <Layout title={`${composer?.name}`}>
       <div className="flex flex-col">
-        <div className="h-96 w-full bg-slate-100 border-b">
-          <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
-            <h1 className="text-4xl font-bold text-slate-900 ">
-              Composer Philip
-            </h1>
+        <div className="h-64 w-full border-b bg-slate-50">
+          <div className="flex flex-col justify-center h-full md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full  ">
+            {/* name card */}
+            <div className="flex flex-col md:flex-row md:items-center my-8">
+              <img
+                className="md:h-32 md:w-32 w-20 h-20 ml-12 rounded-lg shadow-xl"
+                src={composer?.portrait}
+                alt={composer?.name}
+              />
+              <div className=" ml-12 md:mt-0 mt-4">
+                <h1 className="font-serif text-3xl">{composer?.name}</h1>
+                <h2 className="font-serif text-lg md:mt-2 mt-0.5 text-slate-400">
+                  {composer?.complete_name}
+                </h2>
+              </div>
+            </div>
           </div>
         </div>
         <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
           {/* actual inner content starts */}
 
-          <PageTitle title={`Works of Composer ${composerName}`} />
-          <div className="grid md:grid-cols-2 gap-x-6 gap-y-8">
+          <div className="mt-12 grid md:grid-cols-2 gap-x-6 gap-y-8">
             {worksPopular.length > 0 && (
               <div>
                 <SectionTitle text="Popular" />
@@ -151,8 +162,9 @@ export async function getServerSideProps(context) {
   const data = await getWorksByComposerID(parseInt(composerId));
   return {
     props: {
+      data,
       works: data.works,
-      composerName: data.composer.name,
+      composer: data.composer,
     },
   };
 }
