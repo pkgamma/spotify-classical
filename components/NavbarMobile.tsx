@@ -26,7 +26,12 @@ export const iconClassName = "w-6 h-6  text-gray-400  group-hover:text-black ";
 
 export default function NavbarMobile({ className }) {
   return (
-    <div className={cn("", className)}>
+    <div
+      className={cn(
+        "md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t",
+        className
+      )}
+    >
       <div className="grid h-full max-w-lg grid-cols-4 mx-auto">
         <Option link="/" title="Home">
           <HomeIcon className={iconClassName} />

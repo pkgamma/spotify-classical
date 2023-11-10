@@ -64,7 +64,12 @@ export default function NavbarDesktop({ className }) {
   }, [session, spotifyApi]);
 
   return (
-    <div className={cn("", className)}>
+    <div
+      className={cn(
+        "bg-slate-50 md:w-60 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto",
+        className
+      )}
+    >
       <div className="px-4">
         <h2 className="text-md font-semibold font-serif h-20 flex items-center pl-4 mb-2">
           <Link href="/">SymphonyNow</Link>
