@@ -9,27 +9,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default function Works() {
+export default function Works({ works, composerName }) {
   const router = useRouter();
-  const [works, setWorks] = useState([]);
-  const [composerName, setComposerName] = useState([]);
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
-    if (router.isReady) {
-      setIsLoaded(false);
-      const { composerId } = router.query;
-      getWorksByComposerID(parseInt(composerId))
-        .then((data) => {
-          setWorks(data.works);
-          setComposerName(data.composer.name);
-          setIsLoaded(true);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [router]);
+    setIsLoaded(true);
+  }, [works, composerName]);
 
   const worksPopular = [];
   const worksChamber = [];
@@ -61,86 +47,112 @@ export default function Works() {
 
   return (
     <Layout title={`${composerName}`}>
-      <PageTitle title={`Works of Composer ${composerName}`} />
-      <div className="grid md:grid-cols-2 gap-x-6 gap-y-8">
-        {worksPopular.length > 0 && (
-          <div>
-            <SectionTitle text="Popular" />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksPopular?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
-              </div>
-            </ScrollArea>
+      <div className="flex flex-col">
+        <div className="h-96 w-full bg-slate-100 border-b">
+          <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
+            <h1 className="text-4xl font-bold text-slate-900 ">
+              Composer Philip
+            </h1>
           </div>
-        )}
+        </div>
+        <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          {/* actual inner content starts */}
 
-        {worksChamber.length > 0 && (
-          <div>
-            <SectionTitle text="Chamber" more />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksChamber?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
+          <PageTitle title={`Works of Composer ${composerName}`} />
+          <div className="grid md:grid-cols-2 gap-x-6 gap-y-8">
+            {worksPopular.length > 0 && (
+              <div>
+                <SectionTitle text="Popular" />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksPopular?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
-          </div>
-        )}
+            )}
 
-        {worksKeyboard.length > 0 && (
-          <div>
-            <SectionTitle text="Keyboard" more />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksKeyboard?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
+            {worksChamber.length > 0 && (
+              <div>
+                <SectionTitle text="Chamber" more />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksChamber?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
-          </div>
-        )}
+            )}
 
-        {worksOrchestral.length > 0 && (
-          <div>
-            <SectionTitle text="Orchestral" more />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksOrchestral?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
+            {worksKeyboard.length > 0 && (
+              <div>
+                <SectionTitle text="Keyboard" more />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksKeyboard?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
-          </div>
-        )}
+            )}
 
-        {worksStage.length > 0 && (
-          <div>
-            <SectionTitle text="Stage" more />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksStage?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
+            {worksOrchestral.length > 0 && (
+              <div>
+                <SectionTitle text="Orchestral" more />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksOrchestral?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
-          </div>
-        )}
+            )}
 
-        {worksVocal.length > 0 && (
-          <div>
-            <SectionTitle text="Vocal" more />
-            <ScrollArea className="h-96 w-full rounded-md border p-4">
-              <div className="grid gap-2">
-                {worksVocal?.map((work) => (
-                  <CardWork key={work.id} work={work} />
-                ))}
+            {worksStage.length > 0 && (
+              <div>
+                <SectionTitle text="Stage" more />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksStage?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
+            )}
+
+            {worksVocal.length > 0 && (
+              <div>
+                <SectionTitle text="Vocal" more />
+                <ScrollArea className="h-96 w-full rounded-md border p-4">
+                  <div className="grid gap-2">
+                    {worksVocal?.map((work) => (
+                      <CardWork key={work.id} work={work} />
+                    ))}
+                  </div>
+                </ScrollArea>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* actual inner content ends */}
+        </div>
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { composerId } = context.query;
+  const data = await getWorksByComposerID(parseInt(composerId));
+  return {
+    props: {
+      works: data.works,
+      composerName: data.composer.name,
+    },
+  };
 }

@@ -25,15 +25,15 @@ export default function Layout({ children, title = "Default Title" }: Props) {
         ></meta>
       </Head>
 
-      <NavbarDesktop className="" />
-      <NavbarMobile className="" />
+      <NavbarDesktop className="bg-slate-50 md:w-64 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto" />
+      <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
 
-      <main className="md:pl-56">
-        <div className="flex flex-col ">
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
-            {isLoaded ? (
-              children
-            ) : (
+      <main className="md:pl-64">
+        {isLoaded ? (
+          children
+        ) : (
+          <div className="flex flex-col">
+            <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
               <div className="flex items-center justify-center h-screen">
                 <div className="flex flex-col items-center justify-center">
                   <div className="animate-spin">
@@ -41,9 +41,9 @@ export default function Layout({ children, title = "Default Title" }: Props) {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );

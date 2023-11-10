@@ -36,12 +36,27 @@ export default function Composers() {
 
   return (
     <Layout title="Popular Composers">
-      <PageTitle title="Popular Composers" />
-      <SectionTitle text="Popular" />
-      <div className="grid md:grid-cols-3 gap-4">
-        {composers?.map((composer) => (
-          <CardComposer key={composer.id} composer={composer} />
-        ))}
+      <div className="flex flex-col">
+        <div className="h-96 w-full bg-slate-100 border-b">
+          <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
+            <h1 className="text-4xl font-bold text-slate-900 ">
+              Composer Philip
+            </h1>
+          </div>
+        </div>
+        <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          {/* actual inner content starts */}
+
+          <PageTitle title="Popular Composers" />
+          <SectionTitle text="Popular" />
+          <div className="grid md:grid-cols-3 gap-4">
+            {composers?.map((composer) => (
+              <CardComposer key={composer.id} composer={composer} />
+            ))}
+          </div>
+
+          {/* actual inner content ends */}
+        </div>
       </div>
     </Layout>
   );

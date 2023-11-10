@@ -86,30 +86,44 @@ export default function Album() {
 
   return (
     <Layout title={`${album.name}`}>
-      <PageTitle title={`"${album.name}" on Spotify`} />
-
-      <div className=" flex justify-center space-x-6 pb-12">
-        <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
-        {album.external_urls && (
-          <Link href={album.external_urls.spotify} target="_blank">
-            <Button className="bg-[#1DB954]">
-              <SiSpotify className="h-4 w-4 mr-2" />
-              Open in Spotify
-            </Button>
-          </Link>
-        )}
-      </div>
-
-      <SectionTitle text="Tracks" />
-      <ScrollArea className="h-96 w-full rounded-md border p-4">
-        <div className="grid gap-2">
-          {albumTracks.map((track) => (
-            <div onClick={() => playSpotify(track.uri)} key={track.id}>
-              <CardSong track={track} />
-            </div>
-          ))}
+      <div className="flex flex-col">
+        <div className="h-96 w-full bg-slate-100 border-b">
+          <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
+            <h1 className="text-4xl font-bold text-slate-900 ">
+              Composer Philip
+            </h1>
+          </div>
         </div>
-      </ScrollArea>
+        <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          {/* actual inner content starts */}
+
+          <PageTitle title={`"${album.name}" on Spotify`} />
+
+          <div className=" flex justify-center space-x-6 pb-12">
+            <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
+            {album.external_urls && (
+              <Link href={album.external_urls.spotify} target="_blank">
+                <Button className="bg-[#1DB954]">
+                  <SiSpotify className="h-4 w-4 mr-2" />
+                  Open in Spotify
+                </Button>
+              </Link>
+            )}
+          </div>
+
+          <SectionTitle text="Tracks" />
+          <ScrollArea className="h-96 w-full rounded-md border p-4">
+            <div className="grid gap-2">
+              {albumTracks.map((track) => (
+                <div onClick={() => playSpotify(track.uri)} key={track.id}>
+                  <CardSong track={track} />
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+          {/* actual inner content ends */}
+        </div>
+      </div>
     </Layout>
   );
 }

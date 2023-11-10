@@ -20,7 +20,10 @@ export default function CardPeriod(props) {
   return (
     <Link
       href={`/period/${periodKey}`}
-      onClick={() => setCurrPeriod(periodKey)}
+      onClick={() => {
+        setCurrPeriod(periodKey);
+        setIsLoaded(false);
+      }}
     >
       <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
         <div className="cursor-pointer select-none flex items-center h-32">

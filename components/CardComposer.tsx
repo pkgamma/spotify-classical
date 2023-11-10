@@ -1,15 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import { currComposerIdState } from "@/atoms/states";
+import { currComposerIdState, isLoadedState } from "@/atoms/states";
 import { useRecoilState } from "recoil";
 
 export default function CardComposer(props) {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
+
   const { composer } = props;
+
   return (
     <Link
       href={`/composer/${composer.id}`}
-      onClick={() => setCurrComposer(composer.id)}
+      onClick={() => {
+        setCurrComposer(composer.id);
+        setIsLoaded(false);
+      }}
       key={composer.id}
     >
       <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">

@@ -40,55 +40,70 @@ export default function Search({ query, results, success }) {
 
   return (
     <Layout title="Search">
-      <PageTitle title="Search" />
+      <div className="flex flex-col">
+        <div className="h-96 w-full bg-slate-100 border-b">
+          <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
+            <h1 className="text-4xl font-bold text-slate-900 ">
+              Composer Philip
+            </h1>
+          </div>
+        </div>
+        <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          {/* actual inner content starts */}
 
-      <div className="flex items-center mb-12 text-center">
-        <Input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          placeholder="Composer or work title"
-          className="mr-4"
-        />
-        <Button type="submit" onClick={handleSearch}>
-          Search
-        </Button>
+          <PageTitle title="Search" />
+
+          <div className="flex items-center mb-12 text-center">
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+              placeholder="Composer or work title"
+              className="mr-4"
+            />
+            <Button type="submit" onClick={handleSearch}>
+              Search
+            </Button>
+          </div>
+
+          <ul>
+            {results.map((result) =>
+              result.work ? (
+                <Link
+                  href={`/work/${result.work.id}`}
+                  onClick={() => setCurrWorkId(result.work.id)}
+                  key={result.work.id}
+                >
+                  <Row
+                    cover={null}
+                    title={result.work.title}
+                    subtitle={result.work.genre}
+                  />
+                </Link>
+              ) : (
+                <Link
+                  href={`/composer/${result.composer.id}`}
+                  onClick={() => setCurrComposer(result.composer.id)}
+                  key={result.composer.id}
+                >
+                  <Row
+                    cover={result.composer.portrait}
+                    title={result.composer.name}
+                    subtitle={result.composer.complete_name}
+                  />
+                </Link>
+              )
+            )}
+          </ul>
+
+          {/* actual inner content ends */}
+        </div>
       </div>
-
-      <ul>
-        {results.map((result) =>
-          result.work ? (
-            <Link
-              href={`/work/${result.work.id}`}
-              onClick={() => setCurrWorkId(result.work.id)}
-              key={result.work.id}
-            >
-              <Row
-                cover={null}
-                title={result.work.title}
-                subtitle={result.work.genre}
-              />
-            </Link>
-          ) : (
-            <Link
-              href={`/composer/${result.composer.id}`}
-              onClick={() => setCurrComposer(result.composer.id)}
-              key={result.composer.id}
-            >
-              <Row
-                cover={result.composer.portrait}
-                title={result.composer.name}
-                subtitle={result.composer.complete_name}
-              />
-            </Link>
-          )
-        )}
-      </ul>
     </Layout>
   );
 }
