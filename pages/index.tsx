@@ -1,10 +1,22 @@
 import Layout from "@/components/Layout";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   return (
     <Layout title="SymphonyNow">
       <div className="flex justify-center items-center h-screen">
-        <div className="text-center max-w-xl">
+        <motion.div
+          className="text-center max-w-xl"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.3,
+            type: "spring",
+            damping: 10,
+            mass: 0.75,
+            stiffness: 100,
+          }}
+        >
           <h1 className="font-serif text-lg font-semibold">
             Welcome to SymphonyNow
           </h1>
@@ -20,7 +32,7 @@ export default function HomePage() {
             potential of the human spirit, as we discover the wonders of
             classical music together.
           </h2>
-        </div>
+        </motion.div>
       </div>
     </Layout>
   );

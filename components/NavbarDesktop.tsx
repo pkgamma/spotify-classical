@@ -33,7 +33,7 @@ import LoginButtons from "@/components/LoginButtons";
 export const Option = ({ link, title, children }) => {
   return (
     <Link href={link}>
-      <Button variant="ghost" className="w-full justify-start my-0.5">
+      <Button variant="link" className="w-full justify-start my-0.5">
         {children}
         {title}
       </Button>

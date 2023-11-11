@@ -36,13 +36,15 @@ export default function CardAlbum(props) {
       <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
         <div className="cursor-pointer select-none flex items-center">
           <div className="flex items-center justify-center h-28 w-28 bg-gray-100 shrink-0">
-            <Image
-              className="flex items-end justify-center w-3/5 h-auto shadow-lg rounded-sm"
-              src={album.cover}
-              alt={album.album_name}
-              width={128}
-              height={128}
-            />
+            {album?.cover && (
+              <Image
+                className="flex items-end justify-center w-3/5 h-auto shadow-lg rounded-sm"
+                src={album.cover}
+                alt={album?.album_name || "album cover"}
+                width={128}
+                height={128}
+              />
+            )}
           </div>
           <div className="px-6 max-w-sm">
             <h2 className="line-clamp-2">{album.album_name}</h2>

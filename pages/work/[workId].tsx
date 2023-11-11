@@ -14,25 +14,32 @@ import { useRecoilState } from "recoil";
 export default function Recordings({ recs, recTitle }) {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
-
-  const verifiedRecordings = [];
-  const allOtherRecordings = [];
+  const [verifiedRecordings, setVerifiedRecordings] = useState([]);
+  const [allOtherRecordings, setAllOtherRecordings] = useState([]);
 
   useEffect(() => {
-    setIsLoaded(true);
-  }, [recs, setIsLoaded]);
+    const verified = [];
+    const allOther = [];
 
-  recs?.map((recording) => {
-    // added this check to make sure that the recording has an album name
-    // for some reason, open opus sometimes give recordings without album names
-    if (recording.album_name != null) {
-      if (recording.verified === "true") {
-        verifiedRecordings.push(recording);
-      } else {
-        allOtherRecordings.push(recording);
+    recs?.map((recording) => {
+      // added this check to make sure that the recording has an album name
+      // for some reason, open opus sometimes give recordings without album names
+      console.log(recording);
+      if (recording.album_name != null) {
+        if (recording.verified === "true") {
+          verified.push(recording);
+        } else {
+          allOther.push(recording);
+        }
       }
-    }
-  });
+    });
+    setVerifiedRecordings(verified);
+    setAllOtherRecordings(allOther);
+    setIsLoaded(true);
+    console.log(recs);
+    console.log(verifiedRecordings);
+    console.log(allOtherRecordings);
+  }, [recs, setIsLoaded]);
 
   return (
     <Layout title={`${recTitle}`}>
@@ -87,7 +94,7 @@ export default function Recordings({ recs, recTitle }) {
 export async function getServerSideProps(context) {
   const { workId } = context.query;
   const recs = await getRecordingByWorkID(parseInt(workId));
-  const recTitle = recs.work.title;
+  const recTitle = recs.work.title || "";
   const recordings = recs.recordings || null;
   return {
     props: {
