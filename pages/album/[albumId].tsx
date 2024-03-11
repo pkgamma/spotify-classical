@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Head from "next/head";
+import { motion } from "framer-motion";
 
 export default function Album() {
   const router = useRouter();
@@ -90,44 +91,57 @@ export default function Album() {
       <Head>
         <title>{isLoaded ? `${album?.name}` : "Loading"}</title>
       </Head>
-      <div className="flex flex-col">
-        {/* <div className="h-96 w-full bg-slate-100 border-b">
+
+      <motion.div
+        className="min-h-screen"
+        initial={{ y: -6, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 6, opacity: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 200,
+          damping: 20,
+        }}
+      >
+        <div className="flex flex-col">
+          {/* <div className="h-96 w-full bg-slate-100 border-b">
           <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
             <h1 className="text-4xl font-bold text-slate-900 ">
               Composer Philip
             </h1>
           </div>
         </div> */}
-        <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
-          {/* actual inner content starts */}
+          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+            {/* actual inner content starts */}
 
-          <PageTitle title={`"${album.name}" on Spotify`} />
+            <PageTitle title={`"${album.name}" on Spotify`} />
 
-          <div className=" flex justify-center space-x-6 pb-12">
-            <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
-            {album.external_urls && (
-              <Link href={album.external_urls.spotify} target="_blank">
-                <Button className="bg-[#1DB954]">
-                  <SiSpotify className="h-4 w-4 mr-2" />
-                  Open in Spotify
-                </Button>
-              </Link>
-            )}
-          </div>
-
-          <SectionTitle text="Tracks" />
-          <ScrollArea className="h-96 w-full rounded-md border p-4">
-            <div className="grid gap-2">
-              {albumTracks.map((track) => (
-                <div onClick={() => playSpotify(track.uri)} key={track.id}>
-                  <CardSong track={track} />
-                </div>
-              ))}
+            <div className=" flex justify-center space-x-6 pb-12">
+              <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
+              {album.external_urls && (
+                <Link href={album.external_urls.spotify} target="_blank">
+                  <Button className="bg-[#1DB954]">
+                    <SiSpotify className="h-4 w-4 mr-2" />
+                    Open in Spotify
+                  </Button>
+                </Link>
+              )}
             </div>
-          </ScrollArea>
-          {/* actual inner content ends */}
+
+            <SectionTitle text="Tracks" />
+            <ScrollArea className="h-96 w-full rounded-md border p-4">
+              <div className="grid gap-2">
+                {albumTracks.map((track) => (
+                  <div onClick={() => playSpotify(track.uri)} key={track.id}>
+                    <CardSong track={track} />
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+            {/* actual inner content ends */}
+          </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
