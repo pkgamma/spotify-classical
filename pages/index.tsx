@@ -19,9 +19,9 @@ export default function HomePage() {
           damping: 20,
         }}
       >
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex h-screen items-center justify-center">
           <motion.div
-            className="text-center max-w-xl"
+            className="max-w-xl text-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -35,7 +35,7 @@ export default function HomePage() {
             <h1 className="font-serif text-lg font-semibold">
               Welcome to SymphonyNow
             </h1>
-            <h2 className="font-serif text-sm leading-6 mt-4 text-gray-400">
+            <h2 className="mt-4 font-serif text-sm leading-6 text-gray-400">
               Welcome to SymphonyNow, a portal to the timeless world of
               classical music. Enter a world of wonder and enchantment, where
               the soaring melodies and rich harmonies of the greatest composers

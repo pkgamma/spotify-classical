@@ -130,7 +130,7 @@ export async function getWorksByComposerIDEssential(id: number) {
 
 export async function getWorksByComposerIDandGenre(
   id: number,
-  genre: keyof typeof genreOptions
+  genre: keyof typeof genreOptions,
 ) {
   if (genre === "All") {
     return await getWorksByComposerID(id);
@@ -141,7 +141,7 @@ export async function getWorksByComposerIDandGenre(
 
 export async function getWorksByComposerIDandSearch(
   id: number,
-  search: string
+  search: string,
 ) {
   const endpoint = `/work/list/composer/${id}/genre/all/search/${search}.json`;
   return await openOpusApi(endpoint);
@@ -150,7 +150,7 @@ export async function getWorksByComposerIDandSearch(
 export async function getWorksByComposerIDandGenreAndSearch(
   id: number,
   genre: keyof typeof genreOptions,
-  search: string
+  search: string,
 ) {
   const endpoint = `/work/list/composer/${id}/genre/${genre}/search/${search}.json`;
   return await openOpusApi(endpoint);

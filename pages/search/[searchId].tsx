@@ -65,12 +65,12 @@ export default function Search({ query, results, success }) {
             </h1>
           </div>
         </div> */}
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 
             <PageTitle title="Search" />
 
-            <div className="flex items-center mb-12 text-center">
+            <div className="mb-12 flex items-center text-center">
               <Input
                 type="text"
                 value={searchQuery}
@@ -114,7 +114,7 @@ export default function Search({ query, results, success }) {
                       subtitle={result.composer.complete_name}
                     />
                   </Link>
-                )
+                ),
               )}
             </ul>
 

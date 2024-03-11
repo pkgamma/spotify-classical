@@ -48,11 +48,11 @@ export default function Periods() {
             </h1>
           </div>
         </div> */}
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
             <PageTitle title="Explore Time Periods" />
             <SectionTitle text="Periods" />
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               {Object.entries(periodOptions).map(([key, value]) => (
                 <CardPeriod key={key} periodKey={key} periodVal={value} />
               ))}

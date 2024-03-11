@@ -25,11 +25,11 @@ export default function CardPeriod(props) {
         setIsLoaded(false);
       }}
     >
-      <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
-        <div className="cursor-pointer select-none flex items-center h-32">
-          <div className="md:ml-12 mx-6 max-w-md">
+      <div className="rounded-lg border transition ease-in-out md:hover:bg-gray-50 ">
+        <div className="flex h-32 cursor-pointer select-none items-center">
+          <div className="mx-6 max-w-md md:ml-12">
             <h2 className="">{periodVal.title}</h2>
-            <p className="text-sm text-gray-400 mt-2">{periodVal.subtitle}</p>
+            <p className="mt-2 text-sm text-gray-400">{periodVal.subtitle}</p>
           </div>
         </div>
       </div>

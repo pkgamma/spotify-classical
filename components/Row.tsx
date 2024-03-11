@@ -2,14 +2,14 @@ import Image from "next/image";
 
 export default function Row({ cover, title, subtitle }) {
   return (
-    <div className="flex items-center gap-4 py-4 px-4 bg-white hover:bg-gray-50 transition-colors duration-100 cursor-pointer">
+    <div className="flex cursor-pointer items-center gap-4 bg-white px-4 py-4 transition-colors duration-100 hover:bg-gray-50">
       {cover ? (
         <Image
           src={cover}
           alt={title}
           width={128}
           height={128}
-          className="w-16 h-16 shadow-md"
+          className="h-16 w-16 shadow-md"
         />
       ) : (
         <div></div>

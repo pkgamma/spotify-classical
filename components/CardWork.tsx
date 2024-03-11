@@ -18,12 +18,12 @@ export default function CardWork(props) {
         setIsLoaded(false);
       }}
     >
-      <div className=" md:hover:bg-gray-50 transition ease-in-out ">
-        <div className="cursor-pointer select-none flex items-center ">
+      <div className=" transition ease-in-out md:hover:bg-gray-50 ">
+        <div className="flex cursor-pointer select-none items-center ">
           <div className="flex items-center space-x-2">
             <h2 className="line-clamp-1">{work.title}</h2>
             {work.recommended == "1" && (
-              <VerifiedIcon className="shrink-0 w-4 h-4 text-gray-300" />
+              <VerifiedIcon className="h-4 w-4 shrink-0 text-gray-300" />
             )}
           </div>
         </div>

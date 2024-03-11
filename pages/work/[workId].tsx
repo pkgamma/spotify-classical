@@ -67,13 +67,13 @@ export default function Recordings({ recs, recTitle }) {
             </h1>
           </div>
         </div> */}
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 
             <PageTitle title={`Recordings of ${recTitle}`} />
 
             {!recs && (
-              <div className="flex flex-col items-center justify-center h-96">
+              <div className="flex h-96 flex-col items-center justify-center">
                 <h1 className="text-lg ">Nothing Found</h1>
               </div>
             )}
@@ -81,7 +81,7 @@ export default function Recordings({ recs, recTitle }) {
             {verifiedRecordings?.length > 0 && (
               <div>
                 <SectionTitle text="Verified Recordings" />
-                <div className="grid md:grid-cols-2 gap-4 mb-12">
+                <div className="mb-12 grid gap-4 md:grid-cols-2">
                   {verifiedRecordings.map((album) => (
                     <CardAlbum key={album.spotify_albumid} album={album} />
                   ))}
@@ -92,7 +92,7 @@ export default function Recordings({ recs, recTitle }) {
             {allOtherRecordings?.length > 0 && (
               <div>
                 <SectionTitle text="All Recordings" />
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid gap-4 md:grid-cols-2">
                   {allOtherRecordings.map((album) => (
                     <CardAlbum key={album.spotify_albumid} album={album} />
                   ))}

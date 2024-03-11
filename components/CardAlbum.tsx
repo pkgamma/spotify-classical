@@ -33,12 +33,12 @@ export default function CardAlbum(props) {
 
   return (
     <div onClick={handleClick}>
-      <div className="border rounded-lg md:hover:bg-gray-50 transition ease-in-out ">
-        <div className="cursor-pointer select-none flex items-center">
-          <div className="flex items-center justify-center h-28 w-28 bg-gray-100 shrink-0">
+      <div className="rounded-lg border transition ease-in-out md:hover:bg-gray-50 ">
+        <div className="flex cursor-pointer select-none items-center">
+          <div className="flex h-28 w-28 shrink-0 items-center justify-center bg-gray-100">
             {album?.cover && (
               <Image
-                className="flex items-end justify-center w-3/5 h-auto shadow-lg rounded-sm"
+                className="flex h-auto w-3/5 items-end justify-center rounded-sm shadow-lg"
                 src={album.cover}
                 alt={album?.album_name || "album cover"}
                 width={128}
@@ -46,9 +46,9 @@ export default function CardAlbum(props) {
               />
             )}
           </div>
-          <div className="px-6 max-w-sm">
+          <div className="max-w-sm px-6">
             <h2 className="line-clamp-2">{album.album_name}</h2>
-            <p className="text-gray-400 text-sm mt-0.5">{album.year}</p>
+            <p className="mt-0.5 text-sm text-gray-400">{album.year}</p>
           </div>
         </div>
       </div>

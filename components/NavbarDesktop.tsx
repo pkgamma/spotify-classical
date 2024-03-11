@@ -29,19 +29,38 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import LoginButtons from "@/components/LoginButtons";
+import { Separator } from "@/components/ui/separator";
+import { buttonVariants } from "@/components/ui/button";
+import { LucideIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Inbox } from "lucide-react";
 
-export const Option = ({ link, title, children }) => {
+export const Option = ({
+  link = "",
+  title = "",
+  label = "",
+  variant = "ghost",
+  children,
+  onClick = () => {},
+}) => {
   return (
-    <Link href={link}>
-      <Button variant="link" className="w-full justify-start my-0.5">
-        {children}
-        {title}
-      </Button>
+    <Link
+      onClick={onClick}
+      href={link}
+      className={cn(buttonVariants({ variant: variant }), "justify-start")}
+    >
+      {children}
+      {title}
+      {label && <span className="ml-auto text-muted-foreground">{label}</span>}
     </Link>
   );
 };
 
-export const iconClassName = "w-4 h-4 mr-2";
+export const iconClassName = "mr-2 h-4 w-4";
 
 export default function NavbarDesktop() {
   const router = useRouter();
@@ -64,50 +83,59 @@ export default function NavbarDesktop() {
   }, [session, spotifyApi]);
 
   return (
-    <div className="bg-slate-100 h-full">
-      <div className="px-4 fixed top-0 left-0">
-        <h2 className="text-md font-semibold font-serif h-20 flex items-center pl-4 mb-2">
-          <Link href="/">SymphonyNow</Link>
-        </h2>
-        {/* ==== nav bar top ==== */}
-        <div className="">
+    <div className="flex h-full flex-col bg-slate-50">
+      <div className="flex h-[52px] items-center justify-center px-2 font-serif font-bold">
+        SymphonyNow
+      </div>
+
+      <Separator />
+
+      <div className="flex flex-col gap-4 py-2">
+        <nav className="grid gap-1 px-2">
           <Option link="/" title="Home">
-            <HomeIcon className={iconClassName} />
+            <Inbox className={iconClassName} />
           </Option>
           <Option link="/search" title="Search">
             <SearchIcon className={iconClassName} />
           </Option>
+        </nav>
+      </div>
 
-          <h2 className="mb-4 ml-4 mt-10 font-semibold text-gray-400 uppercase text-xs">
-            Browse
-          </h2>
-          <Option link="/periods" title="Periods">
+      <Separator />
+
+      <div className="flex grow flex-col gap-4 py-2">
+        <nav className="grid gap-1 px-2">
+          <Option link="/periods" title="Periods" label="10">
             <HistoryIcon className={iconClassName} />
           </Option>
           <Option link="/composers" title="Composers">
             <UserIcon className={iconClassName} />
           </Option>
-        </div>
-        {/* ==== nav bar btm ==== */}
-        <div className="fixed bottom-0 left-0 px-4 pb-4">
+        </nav>
+      </div>
+
+      <Separator />
+
+      <div className="flex flex-col gap-4 py-2">
+        <nav className="grid gap-1 px-2">
           {session ? (
-            <Button
-              variant="ghost"
-              className="w-full justify-start"
+            <Option
+              link=""
               onClick={() => signOut()}
+              title={session ? session.user.name : "Guest"}
+              label="Logout"
             >
-              <div className="flex items-center justify-start -ml-2">
-                <Avatar className="w-8 h-8 block relative">
-                  <AvatarImage src={session.user.image} />
-                </Avatar>
-                <p className="mx-3">{session ? session.user.name : "Guest"}</p>
-              </div>
-              <LogOutIcon className="w-4 h-4" />
-            </Button>
+              {/* <UserIcon className={iconClassName} /> */}
+              <Avatar className={iconClassName}>
+                <AvatarImage src={session.user.image} />
+              </Avatar>
+            </Option>
           ) : (
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">Login</Button>
+                <Option title="Login">
+                  <UserIcon className={iconClassName} />
+                </Option>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
@@ -121,8 +149,7 @@ export default function NavbarDesktop() {
               </DialogContent>
             </Dialog>
           )}
-        </div>
-        {/* ======== */}
+        </nav>
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ export default function CardSong(props) {
   const { track } = props;
 
   return (
-    <div className=" md:hover:bg-gray-50 transition ease-in-out ">
-      <div className="cursor-pointer select-none flex items-center ">
+    <div className=" transition ease-in-out md:hover:bg-gray-50 ">
+      <div className="flex cursor-pointer select-none items-center ">
         <div className="flex items-center space-x-2">
           <h2 className="">{track.name}</h2>
         </div>

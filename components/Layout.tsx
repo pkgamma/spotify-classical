@@ -10,6 +10,8 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { cn } from "@/lib/utils";
+import { Separator } from "./ui/separator";
 
 type Props = {
   children?: ReactNode;
@@ -37,13 +39,15 @@ export default function Layout({ children }: Props) {
               <NavbarDesktop />
             </ResizablePanel>
             <ResizableHandle />
-            <ResizablePanel>{children}</ResizablePanel>
+            <ResizablePanel>
+              <div>{children}</div>
+            </ResizablePanel>
           </ResizablePanelGroup>
         </div>
 
         {/* mobile */}
         <div className="md:hidden">
-          <NavbarMobile className="fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
+          <NavbarMobile className="fixed bottom-0 left-0 z-50 h-14 w-full border-t bg-white" />
           <div className="min-h-screen">{children}</div>
         </div>
       </main>

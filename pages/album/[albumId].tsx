@@ -111,7 +111,7 @@ export default function Album() {
             </h1>
           </div>
         </div> */}
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 
             <PageTitle title={`"${album.name}" on Spotify`} />
@@ -121,7 +121,7 @@ export default function Album() {
               {album.external_urls && (
                 <Link href={album.external_urls.spotify} target="_blank">
                   <Button className="bg-[#1DB954]">
-                    <SiSpotify className="h-4 w-4 mr-2" />
+                    <SiSpotify className="mr-2 h-4 w-4" />
                     Open in Spotify
                   </Button>
                 </Link>

@@ -67,27 +67,27 @@ export default function Works({ data, works, composer }) {
       >
         <div className="flex flex-col">
           <div className="h-64 w-full border-b bg-slate-50">
-            <div className="flex flex-col justify-center h-full md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full  ">
+            <div className="flex h-full w-full flex-col justify-center md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl  ">
               {/* name card */}
-              <div className="flex flex-col md:flex-row md:items-center my-8">
+              <div className="my-8 flex flex-col md:flex-row md:items-center">
                 <img
-                  className="md:h-32 md:w-32 w-20 h-20 ml-12 rounded-lg shadow-xl"
+                  className="ml-12 h-20 w-20 rounded-lg shadow-xl md:h-32 md:w-32"
                   src={composer?.portrait}
                   alt={composer?.name}
                 />
-                <div className=" ml-12 md:mt-0 mt-4">
+                <div className=" ml-12 mt-4 md:mt-0">
                   <h1 className="font-serif text-3xl">{composer?.name}</h1>
-                  <h2 className="font-serif text-lg md:mt-2 mt-0.5 text-slate-400">
+                  <h2 className="mt-0.5 font-serif text-lg text-slate-400 md:mt-2">
                     {composer?.complete_name}
                   </h2>
                 </div>
               </div>
             </div>
           </div>
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 
-            <div className="mt-12 grid md:grid-cols-2 gap-x-6 gap-y-8">
+            <div className="mt-12 grid gap-x-6 gap-y-8 md:grid-cols-2">
               {worksPopular.length > 0 && (
                 <div>
                   <SectionTitle text="Popular" />

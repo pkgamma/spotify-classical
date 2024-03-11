@@ -41,7 +41,7 @@ export default function Period({ periodId, composers, popularComposers }) {
 
   composers.map((composer) => {
     const popularComposer = popularComposers.find(
-      (popularComposer) => popularComposer.id === composer.id
+      (popularComposer) => popularComposer.id === composer.id,
     );
     if (popularComposer) {
       popularArray.push(composer);
@@ -75,7 +75,7 @@ export default function Period({ periodId, composers, popularComposers }) {
             </h1>
           </div>
         </div> */}
-          <div className="md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full px-4 pb-20 ">
+          <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 
             <PageTitle
@@ -85,7 +85,7 @@ export default function Period({ periodId, composers, popularComposers }) {
             {popularArray.length > 0 && (
               <div>
                 <SectionTitle text="Popular" />
-                <div className="grid md:grid-cols-3 gap-4 mb-12">
+                <div className="mb-12 grid gap-4 md:grid-cols-3">
                   {popularArray?.map((composer) => (
                     <CardComposer key={composer.id} composer={composer} />
                   ))}
@@ -94,7 +94,7 @@ export default function Period({ periodId, composers, popularComposers }) {
             )}
 
             <SectionTitle text="All" />
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid gap-4 md:grid-cols-3">
               {nonPopularArray?.map((composer) => (
                 <CardComposer key={composer.id} composer={composer} />
               ))}
