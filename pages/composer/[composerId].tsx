@@ -8,6 +8,7 @@ import { getWorksByComposerID } from "@/lib/openopus";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import Head from "next/head";
 
 export default function Works({ data, works, composer }) {
   const router = useRouter();
@@ -47,7 +48,10 @@ export default function Works({ data, works, composer }) {
   });
 
   return (
-    <Layout title={`${composer?.name}`}>
+    <>
+      <Head>
+        <title>{isLoaded ? `${composer?.name}` : "Loading"}</title>
+      </Head>
       <div className="flex flex-col">
         <div className="h-64 w-full border-b bg-slate-50">
           <div className="flex flex-col justify-center h-full md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full  ">
@@ -153,7 +157,7 @@ export default function Works({ data, works, composer }) {
           {/* actual inner content ends */}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

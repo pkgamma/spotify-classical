@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import CardPeriod from "@/components/CardPeriod";
 import SectionTitle from "@/components/SectionTitle";
+import Head from "next/head";
 
 export default function Periods() {
   const router = useRouter();
@@ -22,7 +23,10 @@ export default function Periods() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   return (
-    <Layout title="Periods">
+    <>
+      <Head>
+        <title>{isLoaded ? "Periods" : "Loading"}</title>
+      </Head>
       <div className="flex flex-col">
         {/* <div className="h-96 w-full bg-slate-100 border-b">
           <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
@@ -44,6 +48,6 @@ export default function Periods() {
           {/* actual inner content ends */}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }

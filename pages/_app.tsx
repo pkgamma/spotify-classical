@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil";
 import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
+import Layout from "@/components/Layout";
 
 export default function App({
   Component,
@@ -16,7 +17,9 @@ export default function App({
     <SessionProvider session={pageProps.session}>
       <RecoilRoot>
         <AnimatePresence mode="wait" initial={false}>
-          <Component {...pageProps} key={router.asPath} />
+          <Layout title="SymphonyNow">
+            <Component {...pageProps} key={router.asPath} />
+          </Layout>
         </AnimatePresence>
         <Toaster />
       </RecoilRoot>

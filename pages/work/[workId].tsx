@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import Head from "next/head";
 
 export default function Recordings({ recs, recTitle }) {
   const router = useRouter();
@@ -42,7 +43,10 @@ export default function Recordings({ recs, recTitle }) {
   }, [recs, setIsLoaded]);
 
   return (
-    <Layout title={`${recTitle}`}>
+    <>
+      <Head>
+        <title>{isLoaded ? `${recTitle}` : "Loading"}</title>
+      </Head>
       <div className="flex flex-col">
         {/* <div className="h-96 w-full bg-slate-100 border-b">
           <div className="flex flex-col justify-center h-96 md:mt-0 md:mx-auto md:mb-4 md:max-w-7xl w-full bg-slate-200 ">
@@ -87,7 +91,7 @@ export default function Recordings({ recs, recTitle }) {
           {/* actual inner content ends */}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 
