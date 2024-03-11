@@ -65,7 +65,7 @@ export default function NavbarDesktop({ className }) {
 
   return (
     <div className={cn("", className)}>
-      <div className="px-4">
+      <div className="px-4 fixed top-0 left-0">
         <h2 className="text-md font-semibold font-serif h-20 flex items-center pl-4 mb-2">
           <Link href="/">SymphonyNow</Link>
         </h2>

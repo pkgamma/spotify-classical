@@ -3,9 +3,13 @@ import Head from "next/head";
 import NavbarDesktop from "./NavbarDesktop";
 import { useRecoilState } from "recoil";
 import { isLoadedState } from "@/atoms/states";
-import { Loader2 } from "lucide-react";
 import NavbarMobile from "./NavbarMobile";
 import { motion } from "framer-motion";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 type Props = {
   children?: ReactNode;
@@ -24,24 +28,37 @@ export default function Layout({ children, title = "Default Title" }: Props) {
         ></meta>
       </Head>
 
-      <NavbarDesktop className="bg-slate-100 md:w-64 md:block hidden border-r fixed left-0 top-0 bottom-0 overflow-auto z-10" />
-      <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
+      <ResizablePanelGroup direction="horizontal">
+        {/* ---- left panel */}
+        <ResizablePanel defaultSize={22} minSize={18} maxSize={32}>
+          <NavbarDesktop className="bg-slate-100 min-h-full" />
+        </ResizablePanel>
+        {/* ---- handle */}
+        <ResizableHandle />
+        {/* ---- right panel */}
+        <ResizablePanel>
+          <div>
+            <main>
+              <motion.div
+                className="min-h-screen"
+                initial={{ y: -6, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 6, opacity: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 20,
+                }}
+              >
+                <div>{children}</div>
+              </motion.div>
+            </main>
+          </div>
+        </ResizablePanel>
+        {/* ---- */}
+      </ResizablePanelGroup>
 
-      <main>
-        <motion.div
-          className="md:pl-64 min-h-screen"
-          initial={{ y: -6, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 6, opacity: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 200,
-            damping: 20,
-          }}
-        >
-          {children}
-        </motion.div>
-      </main>
+      {/* <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" /> */}
     </div>
   );
 }
