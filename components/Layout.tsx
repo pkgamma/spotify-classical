@@ -26,22 +26,18 @@ export default function Layout({ children }: Props) {
           content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
         ></meta>
       </Head>
-
-      <ResizablePanelGroup direction="horizontal">
-        {/* ---- left panel */}
-        <ResizablePanel defaultSize={20} minSize={16} maxSize={30}>
-          <NavbarDesktop className="" />
-        </ResizablePanel>
-        {/* ---- handle */}
-        <ResizableHandle />
-        {/* ---- right panel */}
-        <ResizablePanel>
-          <div>
-            <main>{children}</main>
-          </div>
-        </ResizablePanel>
-        {/* ---- */}
-      </ResizablePanelGroup>
+      <main>
+        <ResizablePanelGroup
+          direction="horizontal"
+          className="h-full items-stretch"
+        >
+          <ResizablePanel defaultSize={20} minSize={16} maxSize={30}>
+            <NavbarDesktop />
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel>{children}</ResizablePanel>
+        </ResizablePanelGroup>
+      </main>
 
       {/* <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" /> */}
     </div>

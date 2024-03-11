@@ -43,7 +43,7 @@ export const Option = ({ link, title, children }) => {
 
 export const iconClassName = "w-4 h-4 mr-2";
 
-export default function NavbarDesktop({ className }) {
+export default function NavbarDesktop() {
   const router = useRouter();
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
@@ -64,7 +64,7 @@ export default function NavbarDesktop({ className }) {
   }, [session, spotifyApi]);
 
   return (
-    <div className={cn("", className)}>
+    <div className="bg-slate-100 h-full">
       <div className="px-4 fixed top-0 left-0">
         <h2 className="text-md font-semibold font-serif h-20 flex items-center pl-4 mb-2">
           <Link href="/">SymphonyNow</Link>
@@ -74,9 +74,6 @@ export default function NavbarDesktop({ className }) {
           <Option link="/" title="Home">
             <HomeIcon className={iconClassName} />
           </Option>
-          {/* <Option link="/learn" title="Learn">
-            <GraduationCapIcon className={iconClassName} />
-          </Option> */}
           <Option link="/search" title="Search">
             <SearchIcon className={iconClassName} />
           </Option>
@@ -84,18 +81,12 @@ export default function NavbarDesktop({ className }) {
           <h2 className="mb-4 ml-4 mt-10 font-semibold text-gray-400 uppercase text-xs">
             Browse
           </h2>
-          {/* <Option link="/radio" title="Radio">
-            <RadioIcon className={iconClassName} />
-          </Option> */}
           <Option link="/periods" title="Periods">
             <HistoryIcon className={iconClassName} />
           </Option>
           <Option link="/composers" title="Composers">
             <UserIcon className={iconClassName} />
           </Option>
-          {/* <Option link="/genres" title="Genres">
-            <DnaIcon className={iconClassName} />
-          </Option> */}
         </div>
         {/* ==== nav bar btm ==== */}
         <div className="fixed bottom-0 left-0 px-4 pb-4">
