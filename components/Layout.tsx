@@ -27,19 +27,26 @@ export default function Layout({ children }: Props) {
         ></meta>
       </Head>
       <main>
-        <ResizablePanelGroup
-          direction="horizontal"
-          className="h-full items-stretch"
-        >
-          <ResizablePanel defaultSize={20} minSize={16} maxSize={30}>
-            <NavbarDesktop />
-          </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel>{children}</ResizablePanel>
-        </ResizablePanelGroup>
-      </main>
+        {/* desktop */}
+        <div className="hidden md:block">
+          <ResizablePanelGroup
+            direction="horizontal"
+            className="h-full items-stretch"
+          >
+            <ResizablePanel defaultSize={20} minSize={16} maxSize={30}>
+              <NavbarDesktop />
+            </ResizablePanel>
+            <ResizableHandle />
+            <ResizablePanel>{children}</ResizablePanel>
+          </ResizablePanelGroup>
+        </div>
 
-      {/* <NavbarMobile className="md:hidden fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" /> */}
+        {/* mobile */}
+        <div className="md:hidden">
+          <NavbarMobile className="fixed bottom-0 left-0 z-50 w-full h-14 bg-white border-t" />
+          <div className="min-h-screen">{children}</div>
+        </div>
+      </main>
     </div>
   );
 }
