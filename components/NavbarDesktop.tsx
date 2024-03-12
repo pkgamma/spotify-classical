@@ -1,25 +1,7 @@
 import { currPeriodIdState, isLoadedState } from "@/atoms/states";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import useSpotify from "@/hooks/useSpotify";
-import { cn } from "@/lib/utils";
-import {
-  DnaIcon,
-  GraduationCapIcon,
-  HistoryIcon,
-  HomeIcon,
-  ListMusic,
-  LogInIcon,
-  LogOutIcon,
-  RadioIcon,
-  SearchIcon,
-  UserIcon,
-} from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { Button } from "./ui/button";
+import LoginButtons from "@/components/LoginButtons";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -28,16 +10,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import LoginButtons from "@/components/LoginButtons";
 import { Separator } from "@/components/ui/separator";
-import { buttonVariants } from "@/components/ui/button";
-import { LucideIcon } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Inbox } from "lucide-react";
+import useSpotify from "@/hooks/useSpotify";
+import { cn } from "@/lib/utils";
+import { HistoryIcon, Inbox, SearchIcon, UserIcon } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export const iconClassName = "mr-2 h-4 w-4";
 

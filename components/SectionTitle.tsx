@@ -1,7 +1,6 @@
-import { ArrowRightIcon, ChevronLeft, StepBackIcon } from "lucide-react";
-import { Button } from "./ui/button";
-import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
+import { ArrowRightIcon } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function SectionTitle({ text, more = false, className }) {
   const router = useRouter();

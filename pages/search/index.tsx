@@ -5,16 +5,15 @@ import {
   currWorkIdState,
   isLoadedState,
 } from "@/atoms/states";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Search() {
   const router = useRouter();

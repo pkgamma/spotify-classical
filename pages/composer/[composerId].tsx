@@ -1,16 +1,14 @@
 import { isLoadedState } from "@/atoms/states";
 import CardWork from "@/components/CardWork";
-import Layout from "@/components/Layout";
-import PageTitle from "@/components/PageTitle";
 import SectionTitle from "@/components/SectionTitle";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getWorksByComposerID } from "@/lib/openopus";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import { getWorksByComposerID } from "@/lib/openopus";
+import { motion } from "framer-motion";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Works({ data, works, composer }) {
   const router = useRouter();

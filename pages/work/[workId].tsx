@@ -1,17 +1,13 @@
-import { currAlbumIdState, isLoadedState } from "@/atoms/states";
+import { isLoadedState } from "@/atoms/states";
 import CardAlbum from "@/components/CardAlbum";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
-import Row from "@/components/Row";
 import SectionTitle from "@/components/SectionTitle";
 import { getRecordingByWorkID } from "@/lib/concertmaster";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Recordings({ recs, recTitle }) {
   const router = useRouter();

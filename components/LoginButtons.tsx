@@ -1,7 +1,6 @@
-import * as React from "react";
-import { getProviders, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { ListIcon } from "lucide-react";
+import { getProviders, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function LoginButtons() {

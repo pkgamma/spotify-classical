@@ -1,11 +1,5 @@
 import { cn } from "@/lib/utils";
-import {
-  HistoryIcon,
-  HomeIcon,
-  ListIcon,
-  SearchIcon,
-  UserIcon,
-} from "lucide-react";
+import { HistoryIcon, HomeIcon, SearchIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 
 export const Option = ({ link, title, children }) => {

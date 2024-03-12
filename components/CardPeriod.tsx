@@ -1,13 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
 import {
   currComposerIdState,
   currPeriodIdState,
   isLoadedState,
 } from "@/atoms/states";
-import { useRecoilState } from "recoil";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function CardPeriod(props) {
   const router = useRouter();

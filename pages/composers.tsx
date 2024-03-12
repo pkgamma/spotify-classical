@@ -4,18 +4,14 @@ import {
   isLoadedState,
 } from "@/atoms/states";
 import CardComposer from "@/components/CardComposer";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import SectionTitle from "@/components/SectionTitle";
 import { getComposersPopular } from "@/lib/openopus";
-import { ArrowRightIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Composers() {
   const router = useRouter();

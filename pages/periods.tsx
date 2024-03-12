@@ -3,18 +3,15 @@ import {
   currPeriodIdState,
   isLoadedState,
 } from "@/atoms/states";
-import Layout from "@/components/Layout";
+import CardPeriod from "@/components/CardPeriod";
 import PageTitle from "@/components/PageTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { periodOptions } from "@/lib/openopus";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import CardPeriod from "@/components/CardPeriod";
-import SectionTitle from "@/components/SectionTitle";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Periods() {
   const router = useRouter();

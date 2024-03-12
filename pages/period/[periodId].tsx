@@ -1,26 +1,13 @@
-import {
-  currComposerIdState,
-  currPeriodIdState,
-  isLoadedState,
-} from "@/atoms/states";
+import { currPeriodIdState, isLoadedState } from "@/atoms/states";
 import CardComposer from "@/components/CardComposer";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
-import Row from "@/components/Row";
 import SectionTitle from "@/components/SectionTitle";
-import {
-  getComposersByPeriod,
-  getComposersEssential,
-  getComposersPopular,
-  periodOptions,
-} from "@/lib/openopus";
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import Head from "next/head";
+import { getComposersByPeriod, getComposersPopular } from "@/lib/openopus";
 import { motion } from "framer-motion";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Period({ periodId, composers, popularComposers }) {
   const router = useRouter();

@@ -1,6 +1,4 @@
 import { currWorkIdState } from "@/atoms/states";
-import { VerifiedIcon } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 

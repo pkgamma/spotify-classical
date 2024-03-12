@@ -1,14 +1,13 @@
-import Link from "next/link";
-import Image from "next/image";
 import {
   currAlbumIdState,
   currComposerIdState,
   isLoadedState,
 } from "@/atoms/states";
-import { useRecoilState } from "recoil";
-import { useSession } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
 
 export default function CardAlbum(props) {
   const [currComposer, setCurrComposer] = useRecoilState(currComposerIdState);

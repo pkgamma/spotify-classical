@@ -4,21 +4,19 @@ import {
   isPlayingState,
 } from "@/atoms/states";
 import CardSong from "@/components/CardSong";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import useSpotify from "@/hooks/useSpotify";
-import { SiReacthookform, SiSpotify } from "@icons-pack/react-simple-icons";
-import { ToastAction } from "@radix-ui/react-toast";
+import { SiSpotify } from "@icons-pack/react-simple-icons";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Album() {
   const router = useRouter();

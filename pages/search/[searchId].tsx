@@ -1,23 +1,20 @@
 import {
   currComposerIdState,
-  currPeriodIdState,
   currSearchQueryState,
   currWorkIdState,
-  isLoadedState,
 } from "@/atoms/states";
-import Layout from "@/components/Layout";
 import PageTitle from "@/components/PageTitle";
 import Row from "@/components/Row";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { getWorkAndComposerBySearch } from "@/lib/openopus";
+import { motion } from "framer-motion";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Head from "next/head";
-import { motion } from "framer-motion";
 
 export default function Search({ query, results, success }) {
   const router = useRouter();
