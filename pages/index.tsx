@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Head from "next/head";
+import Balancer from "react-wrap-balancer";
 
 export default function HomePage() {
   return (
@@ -20,7 +21,7 @@ export default function HomePage() {
       >
         <div className="flex h-screen items-center justify-center">
           <motion.div
-            className="max-w-xl text-center"
+            className="max-w-xl text-center p-8"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -35,16 +36,18 @@ export default function HomePage() {
               Welcome to SymphonyNow
             </h1>
             <h2 className="mt-4 font-serif text-sm leading-6 text-gray-400">
-              Welcome to SymphonyNow, a portal to the timeless world of
-              classical music. Enter a world of wonder and enchantment, where
-              the soaring melodies and rich harmonies of the greatest composers
-              of all time await you. From the soaring majesty of the Ninth
-              Symphony by Beethoven to the breathtaking beauty of Nocturnes by
-              Chopin, SymphonyNow invites you to immerse yourself in the sublime
-              artistry of classical music. So come, let us journey together
-              through the centuries, exploring the depths of human emotion and
-              the limitless potential of the human spirit, as we discover the
-              wonders of classical music together.
+              <Balancer>
+                Welcome to SymphonyNow, a portal to the timeless world of
+                classical music. Enter a world of wonder and enchantment, where
+                the soaring melodies and rich harmonies of the greatest
+                composers of all time await you. From the soaring majesty of the
+                Ninth Symphony by Beethoven to the breathtaking beauty of
+                Nocturnes by Chopin, SymphonyNow invites you to immerse yourself
+                in the sublime artistry of classical music. So come, let us
+                journey together through the centuries, exploring the depths of
+                human emotion and the limitless potential of the human spirit,
+                as we discover the wonders of classical music together.
+              </Balancer>
             </h2>
           </motion.div>
         </div>

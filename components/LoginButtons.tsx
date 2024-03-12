@@ -1,10 +1,13 @@
+import { isLoadedState } from "@/atoms/states";
 import { Button } from "@/components/ui/button";
 import { ListIcon } from "lucide-react";
 import { getProviders, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function LoginButtons() {
   const [provider, setProvider] = useState(null);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
     async function fetchProviders() {

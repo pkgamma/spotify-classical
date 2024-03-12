@@ -121,7 +121,7 @@ export default function NavbarDesktop() {
                   <UserIcon className={iconClassName} />
                 </Option>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="min-h-60">
                 <DialogHeader>
                   <DialogTitle>Login</DialogTitle>
                   <DialogDescription>
