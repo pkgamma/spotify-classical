@@ -93,9 +93,12 @@ export default function Recordings({ recs, recTitle }) {
               <div>
                 <SectionTitle text="All Recordings" />
                 <div className="grid gap-4 md:grid-cols-2">
-                  {allOtherRecordings.map((album) => (
-                    <CardAlbum key={album.spotify_albumid} album={album} />
-                  ))}
+                  {allOtherRecordings.map(
+                    (album) => (
+                      console.log(album),
+                      (<CardAlbum key={album.spotify_albumid} album={album} />)
+                    ),
+                  )}
                 </div>
               </div>
             )}

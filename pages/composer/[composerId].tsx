@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Head from "next/head";
 import { motion } from "framer-motion";
+import { Separator } from "@/components/ui/separator";
 
 export default function Works({ data, works, composer }) {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function Works({ data, works, composer }) {
         }}
       >
         <div className="flex flex-col">
-          <div className="h-64 w-full border-b bg-slate-50">
+          <div className="h-64 w-full bg-slate-50">
             <div className="flex h-full w-full flex-col justify-center md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl  ">
               {/* name card */}
               <div className="my-8 flex flex-col md:flex-row md:items-center">
@@ -84,6 +85,7 @@ export default function Works({ data, works, composer }) {
               </div>
             </div>
           </div>
+          <Separator />
           <div className="w-full px-4 pb-20 md:mx-auto md:mb-4 md:mt-0 md:max-w-7xl ">
             {/* actual inner content starts */}
 

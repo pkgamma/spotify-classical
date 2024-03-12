@@ -25,7 +25,7 @@ export default function Composers() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   useEffect(() => {
-    setIsLoaded(false);
+    // setIsLoaded(false);
     getComposersPopular()
       .then((data) => {
         setComposers(data.composers);

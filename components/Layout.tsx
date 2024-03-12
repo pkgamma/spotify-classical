@@ -1,17 +1,16 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
-import Head from "next/head";
-import NavbarDesktop from "./NavbarDesktop";
-import { useRecoilState } from "recoil";
 import { isLoadedState } from "@/atoms/states";
-import NavbarMobile from "./NavbarMobile";
-import { motion } from "framer-motion";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { cn } from "@/lib/utils";
-import { Separator } from "./ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Loading from "@/pages/loading";
+import Head from "next/head";
+import { ReactNode } from "react";
+import { useRecoilState } from "recoil";
+import NavbarDesktop from "./NavbarDesktop";
+import NavbarMobile from "./NavbarMobile";
 
 type Props = {
   children?: ReactNode;
@@ -40,7 +39,11 @@ export default function Layout({ children }: Props) {
             </ResizablePanel>
             <ResizableHandle />
             <ResizablePanel>
-              <div>{children}</div>
+              {isLoaded ? (
+                <ScrollArea className="h-screen">{children}</ScrollArea>
+              ) : (
+                <Loading />
+              )}
             </ResizablePanel>
           </ResizablePanelGroup>
         </div>

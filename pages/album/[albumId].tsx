@@ -32,7 +32,7 @@ export default function Album() {
 
   useEffect(() => {
     if (router.isReady) {
-      setIsLoaded(false);
+      // setIsLoaded(false);
       const { albumId } = router.query;
       spotifyApi
         .getAlbum(albumId)

@@ -1,4 +1,4 @@
-import { currPeriodIdState } from "@/atoms/states";
+import { currPeriodIdState, isLoadedState } from "@/atoms/states";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useSpotify from "@/hooks/useSpotify";
 import { cn } from "@/lib/utils";
@@ -39,27 +39,6 @@ import {
 } from "@/components/ui/tooltip";
 import { Inbox } from "lucide-react";
 
-export const Option = ({
-  link = "",
-  title = "",
-  label = "",
-  variant = "ghost",
-  children,
-  onClick = () => {},
-}) => {
-  return (
-    <Link
-      onClick={onClick}
-      href={link}
-      className={cn(buttonVariants({ variant: variant }), "justify-start")}
-    >
-      {children}
-      {title}
-      {label && <span className="ml-auto text-muted-foreground">{label}</span>}
-    </Link>
-  );
-};
-
 export const iconClassName = "mr-2 h-4 w-4";
 
 export default function NavbarDesktop() {
@@ -68,6 +47,30 @@ export default function NavbarDesktop() {
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
   const [currPeriod, setCurrPeriod] = useRecoilState(currPeriodIdState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
+
+  const Option = ({
+    link = "",
+    title = "",
+    label = "",
+    variant = "ghost",
+    children,
+    onClick = () => {},
+  }) => {
+    return (
+      <Link
+        onClick={onClick}
+        href={link}
+        className={cn(buttonVariants({ variant: variant }), "justify-start")}
+      >
+        {children}
+        {title}
+        {label && (
+          <span className="ml-auto text-muted-foreground">{label}</span>
+        )}
+      </Link>
+    );
+  };
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -83,7 +86,7 @@ export default function NavbarDesktop() {
   }, [session, spotifyApi]);
 
   return (
-    <div className="flex h-full flex-col bg-slate-50">
+    <div className="flex min-h-screen flex-col bg-slate-50">
       <div className="flex h-[52px] items-center justify-center px-2 font-serif font-bold">
         SymphonyNow
       </div>
@@ -122,11 +125,11 @@ export default function NavbarDesktop() {
             <Option
               link=""
               onClick={() => signOut()}
-              title={session ? session.user.name : "Guest"}
+              title={session ? session.user?.name : "Guest"}
               label="Logout"
             >
               {/* <UserIcon className={iconClassName} /> */}
-              <Avatar className={iconClassName}>
+              <Avatar className={cn(iconClassName, "h-6 w-6")}>
                 <AvatarImage src={session.user.image} />
               </Avatar>
             </Option>
