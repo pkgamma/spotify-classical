@@ -31,26 +31,47 @@ export default function NavbarDesktop() {
   const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
 
   const Option = ({
-    link = "",
-    title = "",
-    label = "",
+    link,
+    title,
+    label,
     variant = "ghost",
     children,
     onClick = () => {},
+  }: {
+    link: string;
+    title?: string;
+    label?: string;
+    variant?: string;
+    children: React.ReactNode;
+    onClick?: () => void;
   }) => {
-    return (
-      <Link
-        onClick={onClick}
-        href={link}
-        className={cn(buttonVariants({ variant: variant }), "justify-start")}
-      >
-        {children}
-        {title}
-        {label && (
-          <span className="ml-auto text-muted-foreground">{label}</span>
-        )}
-      </Link>
-    );
+    if (link) {
+      return (
+        <Link
+          href={link}
+          className={cn(buttonVariants({ variant: variant }), "justify-start")}
+        >
+          {children}
+          {title}
+          {label && (
+            <span className="ml-auto text-muted-foreground">{label}</span>
+          )}
+        </Link>
+      );
+    } else {
+      return (
+        <button
+          onClick={onClick}
+          className={cn(buttonVariants({ variant: variant }), "justify-start")}
+        >
+          {children}
+          {title}
+          {label && (
+            <span className="ml-auto text-muted-foreground">{label}</span>
+          )}
+        </button>
+      );
+    }
   };
 
   useEffect(() => {

@@ -20,12 +20,13 @@ export default function CardAlbum(props) {
 
   const handleClick = () => {
     if (session) {
-      setCurrAlbum(album.spotify_albumid), setIsLoaded(false);
+      setCurrAlbum(album.spotify_albumid);
+      setIsLoaded(false);
       router.push(`/album/${album.spotify_albumid}`);
     } else {
+      window.location.href = `spotify:album:${album.spotify_albumid}`;
       toast({
-        variant: "destructive",
-        title: "Please log in to Spotify.",
+        title: "Not logged in here, opening Spotify add instead.",
       });
     }
   };

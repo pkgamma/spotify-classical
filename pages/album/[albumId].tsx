@@ -116,8 +116,8 @@ export default function Album() {
 
             <div className=" flex justify-center space-x-6 pb-12">
               <Button onClick={() => playSpotify(album.uri)}>Play Album</Button>
-              {album.external_urls && (
-                <Link href={album.external_urls.spotify} target="_blank">
+              {album.uri && (
+                <Link href={album.uri} target="_blank">
                   <Button className="bg-[#1DB954]">
                     <SiSpotify className="mr-2 h-4 w-4" />
                     Open in Spotify
